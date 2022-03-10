@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с кредитами</title>
+    <link th:href="@{static/css/index.css}" rel="stylesheet">
+</head>
+<body>
+<H1>Работа с кредитами</H1>
+<hr/>
+<div class="wrap">
+    <div class="but">
+        <H3>Список банков</H3>
+        <a href="/banks/new">+ Создать банк</a>
+        <br/>
+        <hr/>
+        <div class="row" th:each="bank : ${banksList}">
+            <form class="formRow" th:method="DELETE"
+                  th:action="@{/banks/{id}(id=${bank.getId()})}"
+                  th:object="${bank}"
+                  accept-charset="UTF-8">
+                <input class="formButton" type="submit" value="Удалить">
+            </form>
+            <form class="formRow" th:method="GET"
+                  th:action="@{/banks/{id}/edit(id=${bank.getId()})}"
+                  th:object="${bank}"
+                  accept-charset="UTF-8">
+                <input class="formButton" type="submit" value="Изменить">
+            </form>
+            <a th:href="@{/banks/{id}(id=${bank.getId()})}">
+                <div class="button" th:text="${bank.getName()+' '
+                            + 'ИНН: ' + bank.getInn()+' '
+                            + 'БИК: ' + bank.getBic()}"></div>
+            </a>
+        </div>
+    </div>
+    <div class="but">
+        <H3>Список клиентов</H3>
+        <a href="/clients/new">+ Создать клиента</a>
+        <br/>
+        <hr/>
+
+        <div>
+            <div class="row" th:each="client : ${clientsList}">
+                <form class="formRow" th:method="DELETE"
+                      th:action="@{/clients/{id}(id=${client.getId()})}"
+                      th:object="${client}"
+                      accept-charset="UTF-8">
+                    <input class="formButton" type="submit" value="Удалить">
+                </form>
+                <form class="formRow" th:method="GET"
+                      th:action="@{/clients/{id}/edit(id=${client.getId()})}"
+                      th:object="${client}"
+                      accept-charset="UTF-8">
+                    <input class="formButton" type="submit" value="Изменить">
+                </form>
+                <a th:href="@{/clients/{id}(id=${client.getId()})}">
+                    <div class="button" th:text="${client.getFirstName()+' '
+                            + client.getLastName()+' '
+                            + client.getFatherName()+', '
+                            +'Паспорт: '+ client.getPasportNumber()+', '
+                            + client.getEmail()+', '
+                            +'Тел.: '+ client.getPhoneNumber()}">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="but">
+    <H3>Список кредитных предложений</H3>
+    <a href="/creditoffers/new">+ Создать кредитное предложение</a>
+    <br/>
+    <hr/>
+    <div>
+        <div class="row" th:each="creditOffer : ${creditOffersList}">
+            <form class="formRow" th:method="DELETE"
+                  th:action="@{/creditoffers/{id}(id=${creditOffer.getId()})}"
+                  th:object="${creditOffer}"
+                  accept-charset="UTF-8">
+                <input class="formButton" type="submit" value="Удалить">
+            </form>
+            <form class="formRow" th:method="GET"
+                  th:action="@{/creditoffers/{id}/edit(id=${creditOffer.getId()})}"
+                  th:object="${creditOffer}"
+                  accept-charset="UTF-8">
+                <input class="formButton" type="submit" value="Изменить">
+            </form>
+            <a th:href="@{/creditoffers/{id}(id=${creditOffer.getId()})}">
+                <div class="button" th:text="${creditOffer.getCreditOrganization().getName()+', '
+                   + 'Лимит: ' + creditOffer.getCreditLimit()+', '
+                   + 'Процент: ' + creditOffer.getInterestRate()}"></div>
+            </a>
+        </div>
+    </div>
+</div>
+<hr/>
+
+</body>
+</html>

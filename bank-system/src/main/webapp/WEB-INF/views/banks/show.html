@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Банк</title>
+    <link th:href="@{~/static/css/show.css}" rel="stylesheet">
+</head>
+<body>
+<div>
+    <div class="but">
+        <p th:text="${bank.getName()}"></p>
+        <p th:text="${bank.getInn()}"></p>
+        <p th:text="${bank.getBic()}"></p>
+        <br/>
+        <div class="row">
+            <form class="formRow" th:method="DELETE"
+                  th:action="@{/banks/{id}(id=${bank.getId()})}"
+                  th:object="${bank}"
+                  accept-charset="UTF-8">
+                <input class="formButton" type="submit" value="Удалить">
+            </form>
+            <form class="formRow" th:method="GET"
+                  th:action="@{/banks/{id}/edit(id=${bank.getId()})}"
+                  th:object="${bank}"
+                  accept-charset="UTF-8">
+                <input class="formButton" type="submit" value="Изменить">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrap">
+<div class="but">
+    <H3>Список кредитных предложений банка</H3>
+    <a href="/creditoffers/new">+ Создать кредитное предложение</a>
+    <br/>
+    <hr/>
+    <div class="row" th:each="creditOfferR : ${creditOffersList}">
+        <form class="formRow" th:method="DELETE"
+              th:action="@{/creditoffers/{id}(id=${creditOfferR.getId()})}"
+              th:object="${creditOfferR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Удалить">
+        </form>
+        <form class="formRow" th:method="GET"
+              th:action="@{/creditoffers/{id}/edit(id=${creditOfferR.getId()})}"
+              th:object="${creditOfferR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Изменить">
+        </form>
+        <a th:href="@{/creditoffers/{id}(id=${creditOfferR.getId()})}">
+            <div class="button" th:text="${creditOfferR.getCreditOrganization().getName()+', '
+                   + 'Лимит: ' + creditOfferR.getCreditLimit()+', '
+                   + 'Процент: ' + creditOfferR.getInterestRate()}"></div>
+        </a>
+    </div>
+    <hr/>
+</div>
+</div>
+</body>
+</html>

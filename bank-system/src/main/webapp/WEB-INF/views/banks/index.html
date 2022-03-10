@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:float="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список банков</title>
+    <link th:href="@{static/css/index.css}" rel="stylesheet">
+</head>
+<body>
+<div class="but">
+    <H3>Список банков</H3>
+    <a href="/banks/new">+ Создать банк</a>
+    <br/>
+    <hr/>
+    <div class="row" th:each="bankR : ${banksList}">
+        <form class="formRow" th:method="DELETE"
+              th:action="@{/banks/{id}(id=${bankR.getId()})}"
+              th:object="${bankR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Удалить">
+        </form>
+        <form class="formRow" th:method="GET"
+              th:action="@{/banks/{id}/edit(id=${bankR.getId()})}"
+              th:object="${bankR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Изменить">
+        </form>
+        <a th:href="@{/banks/{id}(id=${bankR.getId()})}">
+            <div class="button" th:text="${bankR.getName()+' '
+                   + 'ИНН: ' + bankR.getInn()+' '
+                   + 'БИК: ' + bankR.getBic()}"></div>
+        </a>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>

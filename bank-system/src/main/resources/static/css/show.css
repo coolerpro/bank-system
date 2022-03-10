@@ -1,0 +1,51 @@
+
+body {
+    display: block;
+    margin: 8px;
+    background: #ebffec;
+}
+.wrap {
+    display: table;
+}
+.but {
+    display: table-cell;
+    vertical-align: top;
+    border: 1px solid #029000;
+    border-radius: 20px;
+    background: #daefdb;
+    margin: 5px;
+}
+
+
+.row {
+    margin: 5px;
+    border: 1px solid #029000;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: #c2e9c3;
+}
+.button {
+    display: inline-block;
+    border: none;
+    border-radius: 15px;
+    color: #0f3a10;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.formRow {
+    display: inline-block;
+}
+.formButton {
+    border: none;
+    vertical-align: center;
+    background-color: #9adb9d;
+    border-radius: 15px;
+    color: #0f3a10;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}

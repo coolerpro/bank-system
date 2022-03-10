@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:float="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список клиентов</title>
+    <link th:href="@{static/css/index.css}" rel="stylesheet">
+</head>
+<body>
+
+<div class="but">
+    <H3>Список клиентов</H3>
+    <a href="/clients/new">+ Создать клиента</a>
+    <br/>
+    <hr/>
+    <div class="row" th:each="clientR : ${clientsList}">
+        <form class="formRow" th:method="DELETE"
+              th:action="@{/clients/{id}(id=${clientR.getId()})}"
+              th:object="${clientR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Удалить">
+        </form>
+        <form class="formRow" th:method="GET"
+              th:action="@{/clients/{id}/edit(id=${clientR.getId()})}"
+              th:object="${clientR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Изменить">
+        </form>
+        <a th:href="@{/clients/{id}(id=${clientR.getId()})}">
+            <div class="button" th:text="${clientR.getFirstName()+' '
+                   + clientR.getLastName()+' '
+                   + clientR.getFatherName()+', '
+                   +'Паспорт: '+ clientR.getPasportNumber()+', '
+                   + clientR.getEmail()+', '
+                   +'Тел.: '+ clientR.getPhoneNumber()}"></div>
+        </a>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>

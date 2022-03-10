@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список кредитных предложений</title>
+    <link th:href="@{static/css/index.css}" rel="stylesheet">
+</head>
+<body>
+<div class="but">
+    <H3>Список кредитных предложений</H3>
+    <a href="/creditoffers/new">+ Создать кредитное предложение</a>
+    <br/>
+    <hr/>
+    <div class="row" th:each="creditOfferR : ${creditOffersList}">
+        <form class="formRow" th:method="DELETE"
+              th:action="@{/creditoffers/{id}(id=${creditOfferR.getId()})}"
+              th:object="${creditOfferR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Удалить">
+        </form>
+        <form class="formRow" th:method="GET"
+              th:action="@{/creditoffers/{id}/edit(id=${creditOfferR.getId()})}"
+              th:object="${creditOfferR}"
+              accept-charset="UTF-8">
+            <input class="formButton" type="submit" value="Изменить">
+        </form>
+        <a th:href="@{/creditoffers/{id}(id=${creditOfferR.getId()})}">
+            <div class="button" th:text="${creditOfferR.getCreditOrganization().getName()+', '
+                   + 'Лимит: ' + creditOfferR.getCreditLimit()+', '
+                   + 'Процент: ' + creditOfferR.getInterestRate()}"></div>
+        </a>
+    </div>
+    <hr/>
+</div>
+</body>
+</html>
