@@ -1,9 +1,11 @@
 package com.JuniorJavaDeveloper.banksystem.repository;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Bank;
+import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface BankRepository  extends JpaRepository<Bank, UUID> {
+@Repository
+public interface BankRepository extends JpaRepository<Bank, UUID> {
 }

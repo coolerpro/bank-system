@@ -1,8 +1,8 @@
 package com.JuniorJavaDeveloper.banksystem.services.impl;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Bank;
-import com.JuniorJavaDeveloper.banksystem.models.entity.Client;
-import com.JuniorJavaDeveloper.banksystem.models.entity.Credit;
+import com.JuniorJavaDeveloper.banksystem.entity.Bank;
+import com.JuniorJavaDeveloper.banksystem.entity.Client;
+import com.JuniorJavaDeveloper.banksystem.entity.Credit;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditRepository;
 import com.JuniorJavaDeveloper.banksystem.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,19 +36,18 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public List<Credit> getCredits(Client client) {
-        return creditRepository.getCreditsByClient(client.getId());
+        return creditRepository.getCreditsByClient(client);
     }
 
     @Override
     public List<Credit> getCredits(Bank bank) {
-        return creditRepository.getCreditsByBank(bank.getId());
+        return creditRepository.getCreditsByBank(bank);
     }
 
     @Override
     public List<Credit> getCredits(Bank bank, Client client) {
-        return creditRepository.getCreditsByBankClient(bank.getId(), client.getId());
+        return creditRepository.getCreditsByBankClient(bank, client);
     }
-
 
     @Override
     public Credit getCredit(UUID id) {

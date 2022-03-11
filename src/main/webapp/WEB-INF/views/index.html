@@ -87,7 +87,7 @@
                 <input class="formButton" type="submit" value="Изменить">
             </form>
             <a th:href="@{/creditoffers/{id}(id=${creditOffer.getId()})}">
-                <div class="button" th:text="${creditOffer.getCreditOrganization().getName()+', '
+                <div class="button" th:text="${creditOffer.getBank().getName()+', '
                    + 'Лимит: ' + creditOffer.getCreditLimit()+', '
                    + 'Процент: ' + creditOffer.getInterestRate()}"></div>
             </a>

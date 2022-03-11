@@ -1,6 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.services.impl;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Client;
+import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.repository.ClientRepository;
 import com.JuniorJavaDeveloper.banksystem.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;

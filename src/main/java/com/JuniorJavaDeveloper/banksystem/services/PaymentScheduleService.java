@@ -1,6 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.services;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.PaymentSchedule;
+import com.JuniorJavaDeveloper.banksystem.entity.PaymentSchedule;
 
 import java.util.UUID;
 

@@ -1,7 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.repository;
 
-
-import com.JuniorJavaDeveloper.banksystem.models.entity.Client;
+import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

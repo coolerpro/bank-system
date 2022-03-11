@@ -1,7 +1,7 @@
 package com.JuniorJavaDeveloper.banksystem.services.impl;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Bank;
-import com.JuniorJavaDeveloper.banksystem.models.entity.CreditOffer;
+import com.JuniorJavaDeveloper.banksystem.entity.Bank;
+import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditOfferRepository;
 import com.JuniorJavaDeveloper.banksystem.services.BankService;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
@@ -30,7 +30,7 @@ public class CreditOfferServiceImpl implements CreditOfferService {
 
     @Override
     public List<CreditOffer> creditOffersList(Bank bank) {
-        return creditOfferRepository.getCreditOfferByClient(bank.getId());
+        return creditOfferRepository.getCreditOfferByClient(bank);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.JuniorJavaDeveloper.banksystem.models.entity;
+package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -13,7 +13,7 @@ public class CreditOffer {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "bankid")
+    @JoinColumn(name = "bank_id")
     private Bank bank;
 
     @Column(name = "creditlimit")
@@ -21,6 +21,10 @@ public class CreditOffer {
 
     @Column(name = "interestrate")
     private double interestRate;
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
     public UUID getId() {
         return id;
@@ -32,10 +36,6 @@ public class CreditOffer {
 
     public Bank getBank() {
         return bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
     }
 
     public double getCreditLimit() {

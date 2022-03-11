@@ -1,6 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.services.impl;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.PaymentSchedule;
+import com.JuniorJavaDeveloper.banksystem.entity.PaymentSchedule;
 import com.JuniorJavaDeveloper.banksystem.repository.PaymentScheduleRepository;
 import com.JuniorJavaDeveloper.banksystem.services.PaymentScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;

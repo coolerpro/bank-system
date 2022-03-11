@@ -1,7 +1,7 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Bank;
-import com.JuniorJavaDeveloper.banksystem.models.entity.CreditOffer;
+import com.JuniorJavaDeveloper.banksystem.entity.Bank;
+import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
 import com.JuniorJavaDeveloper.banksystem.services.BankService;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class CreditOfferController {
     @GetMapping()
     public String banks(Model model) {
         model.addAttribute("creditOffersList", creditOfferService.creditOffersList());
-        return "creditoffers/index";
+        return "index";
     }
 
     @GetMapping("/{id}")

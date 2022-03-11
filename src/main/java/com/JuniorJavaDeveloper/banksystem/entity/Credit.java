@@ -1,4 +1,4 @@
-package com.JuniorJavaDeveloper.banksystem.models.entity;
+package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
 import java.util.UUID;

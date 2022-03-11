@@ -1,6 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.services;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Bank;
+import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 
 import java.util.List;
 import java.util.UUID;

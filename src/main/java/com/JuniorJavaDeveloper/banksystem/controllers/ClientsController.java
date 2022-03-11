@@ -1,6 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
-import com.JuniorJavaDeveloper.banksystem.models.entity.Client;
+import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
