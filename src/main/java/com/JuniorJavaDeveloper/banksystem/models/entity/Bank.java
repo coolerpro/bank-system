@@ -10,7 +10,7 @@ public class Bank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     @Column(name = "name")
@@ -21,17 +21,6 @@ public class Bank {
 
     @Column(name = "bic")
     private String bic;
-
-    public Bank() {
-    }
-
-    public Bank(UUID id, String name, String inn, String bic) {
-        this.id = id;
-        this.name = name;
-        this.inn = inn;
-        this.bic = bic;
-    }
-
 
     public UUID getId() {
         return id;

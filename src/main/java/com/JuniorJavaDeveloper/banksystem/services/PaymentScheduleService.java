@@ -1,15 +1,16 @@
 package com.JuniorJavaDeveloper.banksystem.services;
 
-
-
-import com.JuniorJavaDeveloper.banksystem.models.PaymentScheduleDto;
+import com.JuniorJavaDeveloper.banksystem.models.entity.PaymentSchedule;
 
 import java.util.UUID;
 
 public interface PaymentScheduleService {
 
-    PaymentScheduleDto getPaymentSchedule(UUID id);
-    void save(PaymentScheduleDto paymentScheduleDto);
-    void update(PaymentScheduleDto paymentScheduleDto);
+    PaymentSchedule getPaymentSchedule(UUID id);
+
+    void save(PaymentSchedule paymentSchedule);
+
+    void update(PaymentSchedule paymentSchedule);
+
     void delete(UUID id);
 }

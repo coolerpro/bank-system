@@ -29,19 +29,6 @@ public class Client {
     @Column(name = "phonenumber")
     private String phoneNumber;
 
-    public Client() {
-    }
-
-    public Client(UUID id, String firstName, String lastName, String fatherName, String email, String pasportNumber, String phoneNumber) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fatherName = fatherName;
-        this.email = email;
-        this.pasportNumber = pasportNumber;
-        this.phoneNumber = phoneNumber;
-    }
-
     public UUID getId() {
         return id;
     }

@@ -1,7 +1,5 @@
 package com.JuniorJavaDeveloper.banksystem.services.impl;
 
-
-import com.JuniorJavaDeveloper.banksystem.models.PaymentScheduleDto;
 import com.JuniorJavaDeveloper.banksystem.models.entity.PaymentSchedule;
 import com.JuniorJavaDeveloper.banksystem.repository.PaymentScheduleRepository;
 import com.JuniorJavaDeveloper.banksystem.services.PaymentScheduleService;
@@ -21,47 +19,22 @@ public class PaymentScheduleImpl implements PaymentScheduleService {
     }
 
     @Override
-    public PaymentScheduleDto getPaymentSchedule(UUID id) {
-        return convertToDto(paymentScheduleRepository.getById(id));
+    public PaymentSchedule getPaymentSchedule(UUID id) {
+        return paymentScheduleRepository.getById(id);
     }
 
     @Override
-    public void save(PaymentScheduleDto paymentScheduleDto) {
-        paymentScheduleRepository.saveAndFlush(convertToEnt(paymentScheduleDto));
+    public void save(PaymentSchedule paymentSchedule) {
+        paymentScheduleRepository.saveAndFlush(paymentSchedule);
     }
 
     @Override
-    public void update(PaymentScheduleDto paymentScheduleDto) {
-        paymentScheduleRepository.saveAndFlush(convertToEnt(paymentScheduleDto));
+    public void update(PaymentSchedule paymentSchedule) {
+        paymentScheduleRepository.saveAndFlush(paymentSchedule);
     }
 
     @Override
     public void delete(UUID id) {
         paymentScheduleRepository.delete(paymentScheduleRepository.getById(id));
     }
-
-
-    private PaymentScheduleDto convertToDto(PaymentSchedule paymentSchedule) {
-
-        PaymentScheduleDto paymentScheduleDto = new PaymentScheduleDto();
-
-        paymentScheduleDto.setId(paymentSchedule.getId());
-        paymentScheduleDto.setDateFirstPayment(paymentSchedule.getDateFirstPayment());
-        paymentScheduleDto.setDateEndPayment(paymentSchedule.getDateEndPayment());
-
-        return paymentScheduleDto;
-    }
-
-    private PaymentSchedule convertToEnt(PaymentScheduleDto paymentScheduleDto) {
-
-        PaymentSchedule paymentSchedule = new PaymentSchedule();
-
-        paymentSchedule.setId(paymentScheduleDto.getId());
-        paymentSchedule.setDateFirstPayment(paymentScheduleDto.getDateFirstPayment());
-        paymentSchedule.setDateEndPayment(paymentScheduleDto.getDateEndPayment());
-
-        return paymentSchedule;
-    }
-
-
 }

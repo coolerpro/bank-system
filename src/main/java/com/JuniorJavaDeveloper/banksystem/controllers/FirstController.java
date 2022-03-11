@@ -25,13 +25,10 @@ public class FirstController {
     }
 
     @GetMapping()
-    public String banks(Model model){
-        //получим всех
-
+    public String banks(Model model) {
         model.addAttribute("banksList", bankService.banksList());
         model.addAttribute("clientsList", clientService.clientsList());
         model.addAttribute("creditOffersList", creditOfferService.creditOffersList());
-
         return "index";
     }
 }

@@ -12,32 +12,24 @@ public class Credit {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "clientid")
-    private UUID clientId;
+    @ManyToOne
+    @JoinColumn(name = "clientid")
+    private Client client;
 
-    @Column(name = "banktid")
-    private UUID bankId;
+    @ManyToOne
+    @JoinColumn(name = "banktid")
+    private Bank bank;
 
-    @Column(name = "creditofferid")
-    private UUID creditOfferId;
+    @ManyToOne
+    @JoinColumn(name = "creditofferid")
+    private CreditOffer creditOffer;
 
-    @Column(name = "paymentscheduleid")
-    private UUID paymentScheduleId;
+    @ManyToOne
+    @JoinColumn(name = "paymentscheduleid")
+    private PaymentSchedule paymentSchedule;
 
     @Column(name = "sum")
     private double sum;
-
-    public Credit() {
-    }
-
-    public Credit(UUID id, UUID clientId, UUID bankId, UUID creditOfferId, UUID paymentScheduleId, double sum) {
-        this.id = id;
-        this.clientId = clientId;
-        this.bankId = bankId;
-        this.creditOfferId = creditOfferId;
-        this.paymentScheduleId = paymentScheduleId;
-        this.sum = sum;
-    }
 
     public UUID getId() {
         return id;
@@ -47,36 +39,36 @@ public class Credit {
         this.id = id;
     }
 
-    public UUID getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(UUID clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public UUID getBankId() {
-        return bankId;
+    public Bank getBank() {
+        return bank;
     }
 
-    public void setBankId(UUID bankId) {
-        this.bankId = bankId;
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 
-    public UUID getCreditOfferId() {
-        return creditOfferId;
+    public CreditOffer getCreditOffer() {
+        return creditOffer;
     }
 
-    public void setCreditOfferId(UUID creditOfferId) {
-        this.creditOfferId = creditOfferId;
+    public void setCreditOffer(CreditOffer creditOffer) {
+        this.creditOffer = creditOffer;
     }
 
-    public UUID getPaymentScheduleId() {
-        return paymentScheduleId;
+    public PaymentSchedule getPaymentSchedule() {
+        return paymentSchedule;
     }
 
-    public void setPaymentScheduleId(UUID paymentScheduleId) {
-        this.paymentScheduleId = paymentScheduleId;
+    public void setPaymentSchedule(PaymentSchedule paymentSchedule) {
+        this.paymentSchedule = paymentSchedule;
     }
 
     public double getSum() {

@@ -13,8 +13,9 @@ public class PaymentByMonth {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "paymentschedule_id")
-    private UUID paymentSchedule_id;
+    @ManyToOne
+    @JoinColumn(name = "paymentschedule_id")
+    private PaymentSchedule paymentSchedule;
 
     @Column(name = "paymentdate")
     private Date paymentDate;
@@ -28,18 +29,6 @@ public class PaymentByMonth {
     @Column(name = "sumpercent")
     private double sumpPercent;
 
-    public PaymentByMonth() {
-    }
-
-    public PaymentByMonth(UUID id, UUID paymentSchedule_id, Date paymentDate, double paymentSum, double sumBody, double sumpPercent) {
-        this.id = id;
-        this.paymentSchedule_id = paymentSchedule_id;
-        this.paymentDate = paymentDate;
-        this.paymentSum = paymentSum;
-        this.sumBody = sumBody;
-        this.sumpPercent = sumpPercent;
-    }
-
     public UUID getId() {
         return id;
     }
@@ -48,12 +37,12 @@ public class PaymentByMonth {
         this.id = id;
     }
 
-    public UUID getPaymentSchedule_id() {
-        return paymentSchedule_id;
+    public PaymentSchedule getPaymentSchedule() {
+        return paymentSchedule;
     }
 
-    public void setPaymentSchedule_id(UUID paymentSchedule_id) {
-        this.paymentSchedule_id = paymentSchedule_id;
+    public void setPaymentSchedule(PaymentSchedule paymentSchedule) {
+        this.paymentSchedule = paymentSchedule;
     }
 
     public Date getPaymentDate() {

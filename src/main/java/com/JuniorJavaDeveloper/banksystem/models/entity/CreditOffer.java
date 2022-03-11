@@ -9,27 +9,18 @@ public class CreditOffer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(name = "bankid")
-    private UUID bankId;
+    @ManyToOne
+    @JoinColumn(name = "bankid")
+    private Bank bank;
 
     @Column(name = "creditlimit")
     private double creditLimit;
 
     @Column(name = "interestrate")
     private double interestRate;
-
-    public CreditOffer() {
-    }
-
-    public CreditOffer(UUID id, UUID bankId, double creditLimit, double interestRate) {
-        this.id = id;
-        this.bankId = bankId;
-        this.creditLimit = creditLimit;
-        this.interestRate = interestRate;
-    }
 
     public UUID getId() {
         return id;
@@ -39,12 +30,12 @@ public class CreditOffer {
         this.id = id;
     }
 
-    public UUID getBankId() {
-        return bankId;
+    public Bank getBank() {
+        return bank;
     }
 
-    public void setBankId(UUID bankId) {
-        this.bankId = bankId;
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 
     public double getCreditLimit() {

@@ -10,7 +10,7 @@ public class PaymentSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     @Column(name = "datefirstpayment")
@@ -18,15 +18,6 @@ public class PaymentSchedule {
 
     @Column(name = "dateendpayment")
     private Date dateEndPayment;
-
-    public PaymentSchedule() {
-    }
-
-    public PaymentSchedule(UUID id, Date dateFirstPayment, Date dateEndPayment) {
-        this.id = id;
-        this.dateFirstPayment = dateFirstPayment;
-        this.dateEndPayment = dateEndPayment;
-    }
 
     public UUID getId() {
         return id;

@@ -1,19 +1,23 @@
 package com.JuniorJavaDeveloper.banksystem.services;
 
-
-import com.JuniorJavaDeveloper.banksystem.models.BankDto;
-import com.JuniorJavaDeveloper.banksystem.models.CreditOfferDto;
+import com.JuniorJavaDeveloper.banksystem.models.entity.Bank;
+import com.JuniorJavaDeveloper.banksystem.models.entity.CreditOffer;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface CreditOfferService {
 
-    List<CreditOfferDto> creditOffersList();
-    List<CreditOfferDto> creditOffersList(BankDto bankDto);
-    CreditOfferDto getCreditOffer(UUID id);
-    void save(CreditOfferDto creditOfferNew) throws Exception;
-    void update(CreditOfferDto creditOfferEdit) throws Exception;
+    List<CreditOffer> creditOffersList();
+
+    List<CreditOffer> creditOffersList(Bank bank);
+
+    CreditOffer getCreditOffer(UUID id);
+
+    void save(CreditOffer creditOfferNew) throws Exception;
+
+    void update(CreditOffer creditOfferEdit) throws Exception;
+
     void delete(UUID id);
 
 }

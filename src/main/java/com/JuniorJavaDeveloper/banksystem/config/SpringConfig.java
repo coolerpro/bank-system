@@ -25,9 +25,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("com.example.JuniorJavaDeveloper.banksystem")
+@ComponentScan("com.JuniorJavaDeveloper.banksystem")
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories("com.example.JuniorJavaDeveloper.banksystem.repository")
+@EnableJpaRepositories("com.JuniorJavaDeveloper.banksystem.repository")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;
