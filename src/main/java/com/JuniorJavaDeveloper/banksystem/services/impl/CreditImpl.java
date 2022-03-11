@@ -4,8 +4,8 @@ import com.JuniorJavaDeveloper.banksystem.models.*;
 import com.JuniorJavaDeveloper.banksystem.models.entity.Credit;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditRepository;
 import com.JuniorJavaDeveloper.banksystem.services.*;
-import com.example.JuniorJavaDeveloper.banksystem.models.*;
-import com.example.JuniorJavaDeveloper.banksystem.services.*;
+import com.JuniorJavaDeveloper.banksystem.models.*;
+import com.JuniorJavaDeveloper.banksystem.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
