@@ -36,17 +36,17 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public List<Credit> getCredits(Client client) {
-        return creditRepository.getCreditsByClient(client);
+        return creditRepository.findCreditsByClient(client);
     }
 
     @Override
     public List<Credit> getCredits(Bank bank) {
-        return creditRepository.getCreditsByBank(bank);
+        return creditRepository.findCreditsByBank(bank);
     }
 
     @Override
     public List<Credit> getCredits(Bank bank, Client client) {
-        return creditRepository.getCreditsByBankClient(bank, client);
+        return creditRepository.findCreditsByBankAndClient(bank, client);
     }
 
     @Override

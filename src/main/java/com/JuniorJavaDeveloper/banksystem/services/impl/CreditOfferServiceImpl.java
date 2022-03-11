@@ -30,7 +30,7 @@ public class CreditOfferServiceImpl implements CreditOfferService {
 
     @Override
     public List<CreditOffer> creditOffersList(Bank bank) {
-        return creditOfferRepository.getCreditOfferByClient(bank);
+        return creditOfferRepository.findCreditOffersByBank(bank);
     }
 
     @Override

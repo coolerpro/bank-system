@@ -12,16 +12,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface CreditRepository  extends JpaRepository<Credit, UUID> {
+public interface CreditRepository extends JpaRepository<Credit, UUID> {
 
-    @Query("SELECT cr FROM Credit cr WHERE cr.client = :client")
-    List<Credit> getCreditsByClient(@Param("client") Client client);
+    List<Credit> findCreditsByClient(Client client);
 
-    @Query("SELECT cr FROM Credit cr WHERE cr.bank = :bank")
-    List<Credit> getCreditsByBank(@Param("bank") Bank bank);
+    List<Credit> findCreditsByBank(Bank bank);
 
-    @Query("SELECT cr FROM Credit cr WHERE cr.bank = :bank and cr.client = :client")
-    List<Credit> getCreditsByBankClient(@Param("bank") Bank bank, @Param("client") Client client);
-
+    List<Credit> findCreditsByBankAndClient(Bank bank, Client client);
 
 }
