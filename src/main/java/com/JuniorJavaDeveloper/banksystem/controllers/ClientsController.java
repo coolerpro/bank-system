@@ -1,8 +1,9 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
-import com.JuniorJavaDeveloper.banksystem.services.ClientService;
+import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,22 +15,22 @@ import java.util.UUID;
 @RequestMapping("/clients")
 public class ClientsController {
 
-    private final ClientService clientService;
+    private final MainService mainService;
 
     @Autowired
-    public ClientsController(ClientService clientService) {
-        this.clientService = clientService;
+    public ClientsController(@Qualifier("clientServiceImpl") MainService mainService) {
+        this.mainService = mainService;
     }
 
     @GetMapping()
     public String clients(Model model) {
-        model.addAttribute("clientsList", clientService.clientsList());
+        model.addAttribute("clientsList", mainService.findAll());
         return "clients/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("client", clientService.getClient(id));
+        model.addAttribute("client", mainService.findById(id));
         return "clients/show";
     }
 
@@ -39,32 +40,32 @@ public class ClientsController {
     }
 
     @PostMapping()
-    public String createClient(@ModelAttribute("clientNew") Client clientNew, BindingResult bindingResult) {
+    public String createClient(@ModelAttribute("clientNew") Client clientNew, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "clients/new";
         }
-        clientService.save(clientNew);
+        mainService.save(clientNew);
         return "redirect:/clients";
     }
 
     @GetMapping("/{id}/edit")
     public String editClient(Model model, @PathVariable("id") UUID id) {
-        model.addAttribute("clientEdit", clientService.getClient(id));
+        model.addAttribute("clientEdit", mainService.findById(id));
         return "clients/edit";
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@ModelAttribute("clientEdit") Client clientEdit, BindingResult bindingResult) {
+    public String updateClient(@ModelAttribute("clientEdit") Client clientEdit, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
             return "clients/edit";
         }
-        clientService.update(clientEdit);
+        mainService.save(clientEdit);
         return "redirect:/clients";
     }
 
     @DeleteMapping("/{id}")
     public String deleteClient(@PathVariable("id") UUID id) {
-        clientService.delete(id);
+        mainService.delete(id);
         return "redirect:/clients";
     }
 }

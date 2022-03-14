@@ -2,7 +2,7 @@ package com.JuniorJavaDeveloper.banksystem.services.impl;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.repository.ClientRepository;
-import com.JuniorJavaDeveloper.banksystem.services.ClientService;
+import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ClientServiceImpl implements ClientService {
+public class ClientServiceImpl implements MainService<Client> {
 
     private ClientRepository clientRepository;
 
@@ -20,23 +20,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> clientsList() {
+    public List<Client> findAll() {
         return clientRepository.findAll();
     }
 
     @Override
-    public Client getClient(UUID id) {
+    public Client findById(UUID id) {
         return clientRepository.getById(id);
     }
 
     @Override
     public void save(Client clientNew) {
-        clientRepository.saveAndFlush(clientNew);
-    }
-
-    @Override
-    public void update(Client clientEdit) {
-        clientRepository.saveAndFlush(clientEdit);
+        clientRepository.save(clientNew);
     }
 
     @Override

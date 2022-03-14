@@ -6,6 +6,7 @@ import com.JuniorJavaDeveloper.banksystem.entity.Credit;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditRepository;
 import com.JuniorJavaDeveloper.banksystem.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +16,13 @@ import java.util.UUID;
 public class CreditServiceImpl implements CreditService {
 
     private CreditRepository creditRepository;
-    private BankService bankService;
-    private ClientService clientService;
+    private MainService bankService;
+    private MainService clientService;
     private CreditOfferService creditOfferService;
-    private PaymentScheduleService paymentScheduleService;
+    private MainService paymentScheduleService;
 
     @Autowired
-    public CreditServiceImpl(CreditRepository creditRepository, BankService bankService, ClientService clientService, CreditOfferService creditOfferService, PaymentScheduleService paymentScheduleService) {
+    public CreditServiceImpl(CreditRepository creditRepository, @Qualifier("bankServiceImpl") MainService bankService, @Qualifier("clientServiceImpl") MainService clientService, CreditOfferService creditOfferService, @Qualifier("paymentScheduleImpl") MainService paymentScheduleService) {
         this.creditRepository = creditRepository;
         this.bankService = bankService;
         this.clientService = clientService;
@@ -30,40 +31,34 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public List<Credit> getCredits() {
+    public List<Credit> findAll() {
         return creditRepository.findAll();
     }
 
     @Override
-    public List<Credit> getCredits(Client client) {
+    public List<Credit> findCreditsByClient(Client client) {
         return creditRepository.findCreditsByClient(client);
     }
 
     @Override
-    public List<Credit> getCredits(Bank bank) {
+    public List<Credit> findCreditsByBank(Bank bank) {
         return creditRepository.findCreditsByBank(bank);
     }
 
     @Override
-    public List<Credit> getCredits(Bank bank, Client client) {
+    public List<Credit> findCreditsByBankAndClient(Bank bank, Client client) {
         return creditRepository.findCreditsByBankAndClient(bank, client);
     }
 
     @Override
-    public Credit getCredit(UUID id) {
+    public Credit findById(UUID id) {
         return creditRepository.getById(id);
     }
 
     @Override
     public void save(Credit creditNew) throws Exception {
         checkFillings(creditNew);
-        creditRepository.saveAndFlush(creditNew);
-    }
-
-    @Override
-    public void update(Credit creditEdit) throws Exception {
-        checkFillings(creditEdit);
-        creditRepository.saveAndFlush(creditEdit);
+        creditRepository.save(creditNew);
     }
 
     @Override

@@ -7,21 +7,12 @@ import com.JuniorJavaDeveloper.banksystem.entity.Credit;
 import java.util.List;
 import java.util.UUID;
 
-public interface CreditService {
+public interface CreditService extends MainService<Credit> {
 
-    List<Credit> getCredits();
+    List<Credit> findCreditsByClient(Client client);
 
-    List<Credit> getCredits(Client client);
+    List<Credit> findCreditsByBank(Bank bank);
 
-    List<Credit> getCredits(Bank bank);
+    List<Credit> findCreditsByBankAndClient(Bank bank, Client client);
 
-    List<Credit> getCredits(Bank bank, Client client);
-
-    Credit getCredit(UUID id);
-
-    void save(Credit creditNew) throws Exception;
-
-    void update(Credit creditEdit) throws Exception;
-
-    void delete(UUID id);
 }

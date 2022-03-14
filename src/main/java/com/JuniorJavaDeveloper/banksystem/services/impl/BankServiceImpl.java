@@ -2,7 +2,7 @@ package com.JuniorJavaDeveloper.banksystem.services.impl;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.repository.BankRepository;
-import com.JuniorJavaDeveloper.banksystem.services.BankService;
+import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class BankServiceImpl implements BankService {
+public class BankServiceImpl implements MainService<Bank> {
 
     private BankRepository bankRepository;
 
@@ -20,23 +20,18 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public List<Bank> banksList() {
+    public List<Bank> findAll() {
         return bankRepository.findAll();
     }
 
     @Override
-    public Bank getBank(UUID id) {
+    public Bank findById(UUID id) {
         return bankRepository.getById(id);
     }
 
     @Override
-    public void save(Bank bankNew) {
-        bankRepository.saveAndFlush(bankNew);
-    }
-
-    @Override
-    public void update(Bank bankEdit) {
-        bankRepository.saveAndFlush(bankEdit);
+    public void save(Bank elem) {
+        bankRepository.save(elem);
     }
 
     @Override

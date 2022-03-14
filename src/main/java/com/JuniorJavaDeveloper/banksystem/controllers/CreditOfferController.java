@@ -2,9 +2,10 @@ package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
-import com.JuniorJavaDeveloper.banksystem.services.BankService;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
+import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,23 +18,23 @@ import java.util.UUID;
 public class CreditOfferController {
 
     private final CreditOfferService creditOfferService;
-    private final BankService bankService;
+    private final MainService bankService;
 
     @Autowired
-    public CreditOfferController(CreditOfferService creditOfferService, BankService bankService) {
+    public CreditOfferController(CreditOfferService creditOfferService, @Qualifier("bankServiceImpl") MainService bankService) {
         this.creditOfferService = creditOfferService;
         this.bankService = bankService;
     }
 
     @GetMapping()
     public String banks(Model model) {
-        model.addAttribute("creditOffersList", creditOfferService.creditOffersList());
+        model.addAttribute("creditOffersList", creditOfferService.findAll());
         return "index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("creditOffer", creditOfferService.getCreditOffer(id));
+        model.addAttribute("creditOffer", creditOfferService.findById(id));
         return "creditoffers/show";
     }
 
@@ -41,7 +42,7 @@ public class CreditOfferController {
     public String newClient(Model model) {
         model.addAttribute("creditOfferNew", new CreditOffer());
         model.addAttribute("bank", new Bank());
-        model.addAttribute("allBanks", bankService.banksList());
+        model.addAttribute("allBanks", bankService.findAll());
         return "creditoffers/new";
     }
 
@@ -50,14 +51,14 @@ public class CreditOfferController {
         if (bindingResultCredit.hasErrors()) {
             return "creditoffers/new";
         }
-        creditOfferNew.setBank(bankService.getBank(bank.getId()));
+        creditOfferNew.setBank((Bank) bankService.findById(bank.getId()));
         creditOfferService.save(creditOfferNew);
         return "redirect:/creditoffers";
     }
 
     @GetMapping("/{id}/edit")
     public String editClient(Model model, @PathVariable("id") UUID id) {
-        model.addAttribute("creditOfferEdit", creditOfferService.getCreditOffer(id));
+        model.addAttribute("creditOfferEdit", creditOfferService.findById(id));
         return "creditoffers/edit";
     }
 
@@ -66,7 +67,7 @@ public class CreditOfferController {
         if (bindingResult.hasErrors()) {
             return "creditoffers/edit";
         }
-        creditOfferService.update(creditOfferEdit);
+        creditOfferService.save(creditOfferEdit);
         return "redirect:/creditoffers";
     }
 

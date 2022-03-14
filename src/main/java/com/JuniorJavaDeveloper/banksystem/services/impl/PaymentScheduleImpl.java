@@ -2,14 +2,15 @@ package com.JuniorJavaDeveloper.banksystem.services.impl;
 
 import com.JuniorJavaDeveloper.banksystem.entity.PaymentSchedule;
 import com.JuniorJavaDeveloper.banksystem.repository.PaymentScheduleRepository;
-import com.JuniorJavaDeveloper.banksystem.services.PaymentScheduleService;
+import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
-public class PaymentScheduleImpl implements PaymentScheduleService {
+public class PaymentScheduleImpl implements MainService<PaymentSchedule> {
 
     private PaymentScheduleRepository paymentScheduleRepository;
 
@@ -19,18 +20,18 @@ public class PaymentScheduleImpl implements PaymentScheduleService {
     }
 
     @Override
-    public PaymentSchedule getPaymentSchedule(UUID id) {
+    public List<PaymentSchedule> findAll() {
+        return paymentScheduleRepository.findAll();
+    }
+
+    @Override
+    public PaymentSchedule findById(UUID id) {
         return paymentScheduleRepository.getById(id);
     }
 
     @Override
     public void save(PaymentSchedule paymentSchedule) {
-        paymentScheduleRepository.saveAndFlush(paymentSchedule);
-    }
-
-    @Override
-    public void update(PaymentSchedule paymentSchedule) {
-        paymentScheduleRepository.saveAndFlush(paymentSchedule);
+        paymentScheduleRepository.save(paymentSchedule);
     }
 
     @Override
