@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "paymentsbymonth")
-public class PaymentByMonth {
+@Table(name = "paymentmonth")
+public class PaymentMonth {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,7 +14,7 @@ public class PaymentByMonth {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "paymentschedule_id")
+    @JoinColumn(name = "paymentscheduleid")
     private PaymentSchedule paymentSchedule;
 
     @Column(name = "paymentdate")
@@ -28,6 +28,17 @@ public class PaymentByMonth {
 
     @Column(name = "sumpercent")
     private double sumpPercent;
+
+    @Column(name = "paid")
+    private boolean paid;
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
 
     public UUID getId() {
         return id;

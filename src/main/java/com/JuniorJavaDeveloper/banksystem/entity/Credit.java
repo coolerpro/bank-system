@@ -31,6 +31,29 @@ public class Credit {
     @Column(name = "sum")
     private double sum;
 
+    @Column(name = "sumbody")
+    private double sumBody;
+
+    public double getSumBody() {
+        return sumBody;
+    }
+
+    public void setSumBody(double sumBody) {
+        this.sumBody = sumBody;
+    }
+
+    public double getSumPercent() {
+        return sumPercent;
+    }
+
+    public void setSumPercent(double sumPercent) {
+        this.sumPercent = sumPercent;
+    }
+
+    @Column(name = "sumpercent")
+    private double sumPercent;
+
+
     public UUID getId() {
         return id;
     }
