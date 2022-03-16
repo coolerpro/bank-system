@@ -1,6 +1,7 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -17,10 +18,10 @@ public class CreditOffer {
     private Bank bank;
 
     @Column(name = "creditlimit")
-    private double creditLimit;
+    private BigDecimal creditLimit;
 
     @Column(name = "interestrate")
-    private double interestRate;
+    private BigDecimal interestRate;
 
     public void setBank(Bank bank) {
         this.bank = bank;
@@ -38,19 +39,19 @@ public class CreditOffer {
         return bank;
     }
 
-    public double getCreditLimit() {
+    public BigDecimal getCreditLimit() {
         return creditLimit;
     }
 
-    public void setCreditLimit(double creditLimit) {
+    public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
     }
 
-    public double getInterestRate() {
+    public BigDecimal getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(double interestRate) {
+    public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
 }

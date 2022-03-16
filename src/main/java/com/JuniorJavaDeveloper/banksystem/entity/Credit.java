@@ -1,6 +1,7 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -29,30 +30,29 @@ public class Credit {
     private PaymentSchedule paymentSchedule;
 
     @Column(name = "sum")
-    private double sum;
+    private BigDecimal sum;
 
     @Column(name = "sumbody")
-    private double sumBody;
+    private BigDecimal sumBody;
 
-    public double getSumBody() {
+    @Column(name = "sumpercent")
+    private BigDecimal sumPercent;
+
+    public BigDecimal getSumBody() {
         return sumBody;
     }
 
-    public void setSumBody(double sumBody) {
+    public void setSumBody(BigDecimal sumBody) {
         this.sumBody = sumBody;
     }
 
-    public double getSumPercent() {
+    public BigDecimal getSumPercent() {
         return sumPercent;
     }
 
-    public void setSumPercent(double sumPercent) {
+    public void setSumPercent(BigDecimal sumPercent) {
         this.sumPercent = sumPercent;
     }
-
-    @Column(name = "sumpercent")
-    private double sumPercent;
-
 
     public UUID getId() {
         return id;
@@ -94,11 +94,11 @@ public class Credit {
         this.paymentSchedule = paymentSchedule;
     }
 
-    public double getSum() {
+    public BigDecimal getSum() {
         return sum;
     }
 
-    public void setSum(double sum) {
+    public void setSum(BigDecimal sum) {
         this.sum = sum;
     }
 }

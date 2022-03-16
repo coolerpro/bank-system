@@ -1,6 +1,8 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -18,16 +20,16 @@ public class PaymentMonth {
     private PaymentSchedule paymentSchedule;
 
     @Column(name = "paymentdate")
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     @Column(name = "paymentsum")
-    private double paymentSum;
+    private BigDecimal paymentSum;
 
     @Column(name = "sumbody")
-    private double sumBody;
+    private BigDecimal sumBody;
 
     @Column(name = "sumpercent")
-    private double sumpPercent;
+    private BigDecimal sumpPercent;
 
     @Column(name = "paid")
     private boolean paid;
@@ -56,35 +58,35 @@ public class PaymentMonth {
         this.paymentSchedule = paymentSchedule;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public double getPaymentSum() {
+    public BigDecimal getPaymentSum() {
         return paymentSum;
     }
 
-    public void setPaymentSum(double paymentSum) {
+    public void setPaymentSum(BigDecimal paymentSum) {
         this.paymentSum = paymentSum;
     }
 
-    public double getSumBody() {
+    public BigDecimal getSumBody() {
         return sumBody;
     }
 
-    public void setSumBody(double sumBody) {
+    public void setSumBody(BigDecimal sumBody) {
         this.sumBody = sumBody;
     }
 
-    public double getSumpPercent() {
+    public BigDecimal getSumpPercent() {
         return sumpPercent;
     }
 
-    public void setSumpPercent(double sumpPercent) {
+    public void setSumpPercent(BigDecimal sumpPercent) {
         this.sumpPercent = sumpPercent;
     }
 }
