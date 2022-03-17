@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head th:fragment="common_header(title,links)">
+    <meta charset="UTF-8">
+
+    <title th:replace="${title}">The awesome application</title>
+
+    <link th:href="@{static/css/index.css}" rel="stylesheet">
+    <th:block th:replace="${links}" />
+
+</head>
+</html>

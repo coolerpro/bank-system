@@ -1,10 +1,11 @@
-package com.JuniorJavaDeveloper.banksystem.services.creditbuilder.impl;
+package com.JuniorJavaDeveloper.banksystem.services.creditmanager.impl;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Credit;
 import com.JuniorJavaDeveloper.banksystem.entity.PaymentMonth;
 import com.JuniorJavaDeveloper.banksystem.entity.PaymentSchedule;
-import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.PaymentMonthBuilder;
-import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.PaymentScheduleBuilder;
+import com.JuniorJavaDeveloper.banksystem.services.creditmanager.PaymentMonthManager;
+import com.JuniorJavaDeveloper.banksystem.services.creditmanager.PaymentScheduleManager;
+import com.JuniorJavaDeveloper.banksystem.services.creditmanager.ScheduleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PaymentScheduleBuilderImpl implements PaymentScheduleBuilder {
+public class PaymentScheduleManagerImpl implements PaymentScheduleManager {
 
-    private PaymentMonthBuilder paymentMonthBuilder;
-    private ScheduleBuilderImpl scheduleBuilder;
-
-    private List<LocalDate> dateList;
+    private PaymentMonthManager paymentMonthManager;
+    private ScheduleManager scheduleManager;
 
     @Autowired
-    public PaymentScheduleBuilderImpl(PaymentMonthBuilder paymentMonthBuilder, ScheduleBuilderImpl scheduleBuilder) {
-        this.paymentMonthBuilder = paymentMonthBuilder;
-        this.scheduleBuilder = scheduleBuilder;
+    public PaymentScheduleManagerImpl(PaymentMonthManager paymentMonthManager, ScheduleManager scheduleManager) {
+        this.paymentMonthManager = paymentMonthManager;
+        this.scheduleManager = scheduleManager;
     }
 
     public void calculatePaymentSchedule(Credit credit, LocalDate dateFirstPay, int countMonth) {
@@ -40,12 +39,12 @@ public class PaymentScheduleBuilderImpl implements PaymentScheduleBuilder {
         sumCredit = calculateCredit(credit, countMonth, sumCredit, paysBodyMonth);
         BigDecimal payMonth = sumCredit.divide(BigDecimal.valueOf(countMonth), 2, RoundingMode.HALF_UP);
 
-        dateList = scheduleBuilder.calculateSchedule(dateFirstPay, countMonth);
+        List<LocalDate> dateList = scheduleManager.calculateSchedule(dateFirstPay, countMonth);
         paymentSchedule.setDateFirstPayment(dateFirstPay);
         paymentSchedule.setDateEndPayment(dateList.get(dateList.size() - 1));
 
         for (int i = 0; i < countMonth; i++) {
-            paymentMonthBuilder.addPaymentMonth(credit, dateList.get(i), payMonth, paysBodyMonth.get(i));
+            paymentMonthManager.addPaymentMonth(credit, dateList.get(i), payMonth, paysBodyMonth.get(i));
         }
 
         for (PaymentMonth payment : credit.getPaymentSchedule().getPaymentMonths()) {

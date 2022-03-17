@@ -1,9 +1,9 @@
-package com.JuniorJavaDeveloper.banksystem.services.creditbuilder.impl;
+package com.JuniorJavaDeveloper.banksystem.services.creditmanager.impl;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Credit;
 import com.JuniorJavaDeveloper.banksystem.entity.PaymentMonth;
 import com.JuniorJavaDeveloper.banksystem.entity.PaymentSchedule;
-import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.PaymentMonthBuilder;
+import com.JuniorJavaDeveloper.banksystem.services.creditmanager.PaymentMonthManager;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class PaymentMonthBuilderImpl implements PaymentMonthBuilder {
+public class PaymentMonthManagerImpl implements PaymentMonthManager {
 
     public void addPaymentMonth(Credit credit, LocalDate datePay, BigDecimal paymentSum, BigDecimal sumBody) {
 
