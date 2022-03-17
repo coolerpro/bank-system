@@ -5,7 +5,6 @@ import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.entity.Credit;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface CreditService extends MainService<Credit> {
 

@@ -3,7 +3,7 @@ package com.JuniorJavaDeveloper.banksystem.services;
 import java.util.List;
 import java.util.UUID;
 
-public interface MainService <T>{
+public interface MainService<T> {
 
     List<T> findAll();
 

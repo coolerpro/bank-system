@@ -30,8 +30,6 @@ public class FirstController {
     @GetMapping()
     public String banks(Model model) {
 
-        creditService.findById(null);
-
         model.addAttribute("banksList", bankService.findAll());
         model.addAttribute("clientsList", clientService.findAll());
         model.addAttribute("creditOffersList", creditOfferService.findAll());

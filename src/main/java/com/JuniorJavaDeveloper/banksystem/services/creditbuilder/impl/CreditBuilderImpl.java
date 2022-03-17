@@ -6,9 +6,7 @@ import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.PaymentSchedule
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Service
 public class CreditBuilderImpl implements CreditBuilder {
@@ -20,13 +18,9 @@ public class CreditBuilderImpl implements CreditBuilder {
         this.paymentScheduleBuilder = paymentScheduleBuilder;
     }
 
-    public void calculateCredit (Credit credit, LocalDate dateFirstPay, int countMonth){
+    public void calculateCredit(Credit credit, LocalDate dateFirstPay, int countMonth) {
         paymentScheduleBuilder.calculatePaymentSchedule(credit, dateFirstPay, countMonth);
     }
-
-
-
-
 
 
 }

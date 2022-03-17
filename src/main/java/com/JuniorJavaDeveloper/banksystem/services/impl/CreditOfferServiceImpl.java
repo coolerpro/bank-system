@@ -4,9 +4,7 @@ import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditOfferRepository;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
-import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +14,10 @@ import java.util.UUID;
 public class CreditOfferServiceImpl implements CreditOfferService {
 
     private CreditOfferRepository creditOfferRepository;
-    private MainService bankService;
 
     @Autowired
-    public CreditOfferServiceImpl(CreditOfferRepository creditOfferRepository, @Qualifier("bankServiceImpl") MainService bankService) {
+    public CreditOfferServiceImpl(CreditOfferRepository creditOfferRepository) {
         this.creditOfferRepository = creditOfferRepository;
-        this.bankService = bankService;
     }
 
     @Override

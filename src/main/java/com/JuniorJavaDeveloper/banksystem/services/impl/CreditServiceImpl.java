@@ -3,16 +3,11 @@ package com.JuniorJavaDeveloper.banksystem.services.impl;
 import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.entity.Credit;
-import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditRepository;
 import com.JuniorJavaDeveloper.banksystem.services.*;
-import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.CreditBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,20 +15,10 @@ import java.util.UUID;
 public class CreditServiceImpl implements CreditService {
 
     private CreditRepository creditRepository;
-    private MainService bankService;
-    private MainService clientService;
-    private CreditOfferService creditOfferService;
-    private MainService paymentScheduleService;
-    private CreditBuilder creditBuilder;
 
     @Autowired
-    public CreditServiceImpl(CreditRepository creditRepository, @Qualifier("bankServiceImpl") MainService bankService, @Qualifier("clientServiceImpl") MainService clientService, CreditOfferService creditOfferService, @Qualifier("paymentScheduleImpl") MainService paymentScheduleService, CreditBuilder creditBuilder) {
+    public CreditServiceImpl(CreditRepository creditRepository) {
         this.creditRepository = creditRepository;
-        this.bankService = bankService;
-        this.clientService = clientService;
-        this.creditOfferService = creditOfferService;
-        this.paymentScheduleService = paymentScheduleService;
-        this.creditBuilder = creditBuilder;
     }
 
     @Override
@@ -58,17 +43,6 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit findById(UUID id) {
-
-        Credit credit = new Credit();
-
-        CreditOffer creditOffer = new CreditOffer();
-        creditOffer.setInterestRate(BigDecimal.valueOf(15));
-
-        credit.setCreditOffer(creditOffer);
-        credit.setSumBody(BigDecimal.valueOf(10000));
-
-        creditBuilder.calculateCredit(credit, LocalDate.now(), 6);
-
         return creditRepository.getById(id);
     }
 

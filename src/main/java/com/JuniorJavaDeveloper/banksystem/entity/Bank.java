@@ -1,6 +1,5 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
-
 import javax.persistence.*;
 import java.util.UUID;
 
