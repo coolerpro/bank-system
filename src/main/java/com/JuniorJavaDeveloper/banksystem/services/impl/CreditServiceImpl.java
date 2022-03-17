@@ -65,7 +65,7 @@ public class CreditServiceImpl implements CreditService {
         creditOffer.setInterestRate(BigDecimal.valueOf(15));
 
         credit.setCreditOffer(creditOffer);
-        credit.setSum(BigDecimal.valueOf(10000));
+        credit.setSumBody(BigDecimal.valueOf(10000));
 
         creditBuilder.calculateCredit(credit, LocalDate.now(), 6);
 

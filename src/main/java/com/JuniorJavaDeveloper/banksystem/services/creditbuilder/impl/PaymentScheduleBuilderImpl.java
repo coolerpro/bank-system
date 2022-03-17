@@ -1,6 +1,7 @@
 package com.JuniorJavaDeveloper.banksystem.services.creditbuilder.impl;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Credit;
+import com.JuniorJavaDeveloper.banksystem.entity.PaymentMonth;
 import com.JuniorJavaDeveloper.banksystem.entity.PaymentSchedule;
 import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.PaymentMonthBuilder;
 import com.JuniorJavaDeveloper.banksystem.services.creditbuilder.PaymentScheduleBuilder;
@@ -30,30 +31,41 @@ public class PaymentScheduleBuilderImpl implements PaymentScheduleBuilder {
     public void calculatePaymentSchedule(Credit credit, LocalDate dateFirstPay, int countMonth) {
 
         credit.setPaymentSchedule(new PaymentSchedule());
+        PaymentSchedule paymentSchedule = credit.getPaymentSchedule();
 
         BigDecimal sumCredit = BigDecimal.ZERO;
+        BigDecimal sumPercent = BigDecimal.ZERO;
         List<BigDecimal> paysBodyMonth = new ArrayList<>();
 
         sumCredit = calculateCredit(credit, countMonth, sumCredit, paysBodyMonth);
+        BigDecimal payMonth = sumCredit.divide(BigDecimal.valueOf(countMonth), 2, RoundingMode.HALF_UP);
 
         dateList = scheduleBuilder.calculateSchedule(dateFirstPay, countMonth);
-        BigDecimal payMonth = sumCredit.divide(BigDecimal.valueOf(countMonth),2, RoundingMode.HALF_UP);
+        paymentSchedule.setDateFirstPayment(dateFirstPay);
+        paymentSchedule.setDateEndPayment(dateList.get(dateList.size() - 1));
 
         for (int i = 0; i < countMonth; i++) {
             paymentMonthBuilder.addPaymentMonth(credit, dateList.get(i), payMonth, paysBodyMonth.get(i));
         }
+
+        for (PaymentMonth payment : credit.getPaymentSchedule().getPaymentMonths()) {
+            sumPercent = sumPercent.add(payment.getSumpPercent());
+        }
+
+        credit.setSumPercent(sumPercent);
+        credit.setSum(payMonth.multiply(BigDecimal.valueOf(countMonth)));
     }
 
     private BigDecimal calculateCredit(Credit credit, int countMonth, BigDecimal sumCredit, List<BigDecimal> paysBodyMonth) {
 
         BigDecimal percentYear = credit.getCreditOffer().getInterestRate();
-        BigDecimal ratioMonth = percentYear.divide(BigDecimal.valueOf(12),6, RoundingMode.HALF_UP).divide(BigDecimal.valueOf(100),6, RoundingMode.HALF_UP);
+        BigDecimal ratioMonth = percentYear.divide(BigDecimal.valueOf(12), 6, RoundingMode.HALF_UP).divide(BigDecimal.valueOf(100), 6, RoundingMode.HALF_UP);
 
-        BigDecimal sumBodyBalance = credit.getSum();
+        BigDecimal sumBodyBalance = credit.getSumBody();
 
         for (int i = countMonth; i > 0; --i) {
 
-            BigDecimal payMonthBody = sumBodyBalance.divide(BigDecimal.valueOf(i),2, RoundingMode.HALF_UP);
+            BigDecimal payMonthBody = sumBodyBalance.divide(BigDecimal.valueOf(i), 2, RoundingMode.HALF_UP);
             paysBodyMonth.add(payMonthBody);
 
             BigDecimal payMonthPercent = sumBodyBalance.multiply(ratioMonth);
@@ -62,6 +74,7 @@ public class PaymentScheduleBuilderImpl implements PaymentScheduleBuilder {
             sumBodyBalance = sumBodyBalance.subtract(payMonthBody);
 
         }
+
         return sumCredit;
     }
 }
