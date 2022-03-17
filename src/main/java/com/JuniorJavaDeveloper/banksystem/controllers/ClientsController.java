@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/clients")
+@RequestMapping("/client")
 public class ClientsController {
 
     private final MainService mainService;
@@ -25,13 +25,13 @@ public class ClientsController {
     @GetMapping()
     public String clients(Model model) {
         model.addAttribute("clientsList", mainService.findAll());
-        return "clients/index";
+        return "client/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
         model.addAttribute("client", mainService.findById(id));
-        return "clients/show";
+        return "client/show";
     }
 
     @GetMapping("/new")
@@ -42,30 +42,30 @@ public class ClientsController {
     @PostMapping()
     public String createClient(@ModelAttribute("clientNew") Client clientNew, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
-            return "clients/new";
+            return "client/new";
         }
         mainService.save(clientNew);
-        return "redirect:/clients";
+        return "redirect:/client";
     }
 
     @GetMapping("/{id}/edit")
     public String editClient(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("clientEdit", mainService.findById(id));
-        return "clients/edit";
+        return "client/edit";
     }
 
     @PatchMapping("/{id}")
     public String updateClient(@ModelAttribute("clientEdit") Client clientEdit, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
-            return "clients/edit";
+            return "client/edit";
         }
         mainService.save(clientEdit);
-        return "redirect:/clients";
+        return "redirect:/client";
     }
 
     @DeleteMapping("/{id}")
     public String deleteClient(@PathVariable("id") UUID id) {
         mainService.delete(id);
-        return "redirect:/clients";
+        return "redirect:/client";
     }
 }

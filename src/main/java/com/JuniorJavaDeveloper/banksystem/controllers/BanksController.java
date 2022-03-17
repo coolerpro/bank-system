@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/banks")
+@RequestMapping("/bank")
 public class BanksController {
 
     private final MainService mainService;
@@ -31,7 +31,7 @@ public class BanksController {
     @GetMapping()
     public String banks(Model model) {
         model.addAttribute("banksList", mainService.findAll());
-        return "banks/index";
+        return "bank/index";
     }
 
     @GetMapping("/{id}")
@@ -40,7 +40,7 @@ public class BanksController {
         model.addAttribute("bank", bank);
         model.addAttribute("creditOffersList", creditOfferService.findCreditOffersByBank(bank));
         model.addAttribute("creditList", creditService.findCreditsByBank(bank));
-        return "banks/show";
+        return "bank/show";
     }
 
     @GetMapping("/new")
@@ -51,22 +51,22 @@ public class BanksController {
     @PostMapping()
     public String createClient(@ModelAttribute("bankNew") Bank bankNew, BindingResult bindingResult) throws Exception {
         if (bindingResult.hasErrors()) {
-            return "banks/new";
+            return "bank/new";
         }
         mainService.save(bankNew);
-        return "redirect:/banks";
+        return "redirect:/bank";
     }
 
     @GetMapping("/{id}/edit")
     public String editClient(Model model, @PathVariable("id") UUID id) {
         model.addAttribute("bankEdit", mainService.findById(id));
-        return "banks/edit";
+        return "bank/edit";
     }
 
     @PatchMapping("/{id}")
     public String updateClient(@ModelAttribute("bankEdit") Bank bankEdit, BindingResult bindingResult, @PathVariable("id") UUID id) throws Exception {
         if (bindingResult.hasErrors()) {
-            return "banks/edit";
+            return "bank/edit";
         }
         mainService.save(bankEdit);
         return "redirect:/banks";
@@ -75,6 +75,6 @@ public class BanksController {
     @DeleteMapping("/{id}")
     public String deleteBank(@PathVariable("id") UUID id) {
         mainService.delete(id);
-        return "redirect:/banks";
+        return "redirect:/bank";
     }
 }

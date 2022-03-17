@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Работа с кредитами</title>
-    <link th:href="@{static/css/index.css}" rel="stylesheet">
 </head>
 <body>
-<H1>Работа с кредитами</H1>
+
+<div th:replace="header :: header"></div>
+
 <hr/>
 <div class="wrap">
     <div class="but">
@@ -95,6 +95,8 @@
     </div>
 </div>
 <hr/>
+
+<div th:replace="footer :: footer"></div>
 
 </body>
 </html>

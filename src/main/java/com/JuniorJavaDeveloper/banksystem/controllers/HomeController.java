@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("")
-public class FirstController {
+public class HomeController {
 
     private final CreditOfferService creditOfferService;
     private final MainService bankService;
@@ -20,7 +20,7 @@ public class FirstController {
     private final CreditService creditService;
 
     @Autowired
-    public FirstController(CreditOfferService creditOfferService, @Qualifier("bankServiceImpl") MainService bankService, @Qualifier("clientServiceImpl") MainService clientService, CreditService creditService) {
+    public HomeController(CreditOfferService creditOfferService, @Qualifier("bankServiceImpl") MainService bankService, @Qualifier("clientServiceImpl") MainService clientService, CreditService creditService) {
         this.creditOfferService = creditOfferService;
         this.bankService = bankService;
         this.clientService = clientService;
