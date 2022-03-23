@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Создание кредитного предложения</title>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
-<form th:method="POST" th:action="@{/creditoffers}" accept-charset="UTF-8">
+<form th:method="POST" th:action="@{/creditoffer}" accept-charset="UTF-8">
 
     <label for="bank.Id">Банк: </label>
     <select th:field="*{bank.Id}" id="bank.Id">
@@ -30,5 +30,6 @@
     <input type="submit" value="Создать!">
 </form>
 
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

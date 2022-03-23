@@ -5,8 +5,9 @@
     <title>Создание банка</title>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
-<form th:method="POST" th:action="@{/banks}" th:object="${bankNew}" accept-charset="UTF-8">
+<form th:method="POST" th:action="@{/bank}" th:object="${bankNew}" accept-charset="UTF-8">
 
 
     <label for="name">Банк: </label>
@@ -27,5 +28,6 @@
     <input type="submit" value="Создать!">
 </form>
 
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

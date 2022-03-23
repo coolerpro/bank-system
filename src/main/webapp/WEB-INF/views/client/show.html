@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Клиент</title>
-    <style>
-        div.but{
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
 <p th:text="${client.getFirstName()}"></p>
 <p th:text="${client.getLastName()}"></p>
@@ -21,7 +16,7 @@
 <div>
     <div class="but">
         <form th:method="DELETE"
-              th:action="@{/clients/{id}(id=${client.getId()})}"
+              th:action="@{/client/{id}(id=${client.getId()})}"
               th:object="${client}"
               accept-charset="UTF-8">
             <input type="submit" value="Удалить">
@@ -29,7 +24,7 @@
     </div>
     <div class="but">
         <form th:method="GET"
-              th:action="@{/clients/{id}/edit(id=${client.getId()})}"
+              th:action="@{/client/{id}/edit(id=${client.getId()})}"
               th:object="${client}"
               accept-charset="UTF-8">
             <input type="submit" value="Изменить">
@@ -37,6 +32,6 @@
     </div>
 </div>
 
-
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

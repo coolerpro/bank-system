@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Кредитное предложение</title>
-    <style>
-        div.but{
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
 <p th:text="${creditOffer.getBank().getName()}"></p>
 <p th:text="${creditOffer.getCreditLimit()}"></p>
@@ -18,7 +13,7 @@
 <div>
     <div class="but">
         <form th:method="DELETE"
-              th:action="@{/creditoffers/{id}(id=${creditOffer.getId()})}"
+              th:action="@{/creditoffer/{id}(id=${creditOffer.getId()})}"
               th:object="${creditOffer}"
               accept-charset="UTF-8">
             <input type="submit" value="Удалить">
@@ -26,7 +21,7 @@
     </div>
     <div class="but">
         <form th:method="GET"
-              th:action="@{/creditoffers/{id}/edit(id=${creditOffer.getId()})}"
+              th:action="@{/creditoffer/{id}/edit(id=${creditOffer.getId()})}"
               th:object="${creditOffer}"
               accept-charset="UTF-8">
             <input type="submit" value="Изменить">
@@ -34,6 +29,6 @@
     </div>
 </div>
 
-
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Изменить данные банка</title>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
-<form th:method="PATCH" th:action="@{/banks/{id}(id=${bankEdit.getId()})}"
+<form th:method="PATCH" th:action="@{/bank/{id}(id=${bankEdit.getId()})}"
       th:object="${bankEdit}" accept-charset="UTF-8">
 
     <label for="name">Банк: </label>
@@ -27,5 +27,6 @@
     <input type="submit" value="Сохранить!">
 </form>
 
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

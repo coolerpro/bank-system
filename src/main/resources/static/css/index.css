@@ -1,21 +1,21 @@
-
-body {
+.body {
     display: block;
     margin: 8px;
     background: #ebffec;
 }
+
 .wrap {
-    display: table;
+    text-align: center;
+    width: 100%;
 }
+
 .but {
-    display: table-cell;
-    vertical-align: top;
+    display: inline-block;
+    padding: 5px;
     border: 1px solid #029000;
     border-radius: 20px;
     background: #daefdb;
-    margin: 5px;
 }
-
 
 .row {
     margin: 5px;
@@ -24,6 +24,7 @@ body {
     border-radius: 20px;
     background: #c2e9c3;
 }
+
 .button {
     display: inline-block;
     border: none;
@@ -38,6 +39,7 @@ body {
 .formRow {
     display: inline-block;
 }
+
 .formButton {
     border: none;
     vertical-align: center;
@@ -48,4 +50,23 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+}
+
+.navbar {
+    padding-left: 0px;
+    margin: 5px;
+    position: relative;
+}
+
+.menuButton {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #029000;
+    border-radius: 20px;
+    background: #daefdb;
 }

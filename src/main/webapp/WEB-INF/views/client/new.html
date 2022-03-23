@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Создание клиента</title>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
-<form th:method="POST" th:action="@{/clients}" th:object="${clientNew}" accept-charset="UTF-8">
+<form th:method="POST" th:action="@{/client}" th:object="${clientNew}" accept-charset="UTF-8">
 
     <label for="firstName">Имя: </label>
     <input type="text" th:field="*{firstName}" id="firstName"/>
@@ -42,5 +42,6 @@
     <input type="submit" value="Создать!">
 </form>
 
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

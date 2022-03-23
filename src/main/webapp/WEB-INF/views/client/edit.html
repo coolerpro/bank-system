@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="head :: header(~{::title},~{})">
     <title>Изменить данные клиента</title>
 </head>
 <body>
+<div th:replace="header :: header"></div>
 
-<form th:method="PATCH" th:action="@{/clients/{id}(id=${clientEdit.getId()})}"
+<form th:method="PATCH" th:action="@{/client/{id}(id=${clientEdit.getId()})}"
       th:object="${clientEdit}" accept-charset="UTF-8">
 
     <label for="firstName">Имя: </label>
@@ -42,5 +42,6 @@
     <input type="submit" value="Сохранить!">
 </form>
 
+<div th:replace="footer :: footer"></div>
 </body>
 </html>

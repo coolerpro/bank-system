@@ -45,7 +45,7 @@ public class BanksController {
 
     @GetMapping("/new")
     public String newClient(@ModelAttribute("bankNew") Bank bankNew) {
-        return "banks/new";
+        return "bank/new";
     }
 
     @PostMapping()
@@ -69,7 +69,7 @@ public class BanksController {
             return "bank/edit";
         }
         mainService.save(bankEdit);
-        return "redirect:/banks";
+        return "redirect:/bank";
     }
 
     @DeleteMapping("/{id}")

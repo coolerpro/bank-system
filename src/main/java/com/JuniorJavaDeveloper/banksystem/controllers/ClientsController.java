@@ -36,7 +36,7 @@ public class ClientsController {
 
     @GetMapping("/new")
     public String newClient(@ModelAttribute("clientNew") Client clientNew) {
-        return "clients/new";
+        return "client/new";
     }
 
     @PostMapping()
