@@ -1,12 +1,13 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
+import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
+import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -16,50 +17,86 @@ import java.util.UUID;
 public class ClientsController {
 
     private final MainService mainService;
+    private final FormManager formManager;
 
     @Autowired
-    public ClientsController(@Qualifier("clientServiceImpl") MainService mainService) {
+    public ClientsController(@Qualifier("clientServiceImpl") MainService mainService,
+                             FormManager formManager) {
         this.mainService = mainService;
+        this.formManager = formManager;
     }
 
     @GetMapping()
     public String clients(Model model) {
-        model.addAttribute("clientsList", mainService.findAll());
-        return "client/index";
+
+        ClientForm clientForm = formManager.getClientForm();
+
+        clientForm.setTitle("Список клиентов");
+        clientForm.setContent("clientlist");
+        clientForm.setClientsList(mainService.findAll());
+
+        model.addAttribute("form", clientForm);
+
+        return "index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
-        model.addAttribute("client", mainService.findById(id));
-        return "client/show";
+
+        ClientForm clientForm = formManager.getClientForm();
+
+        Client client = (Client) mainService.findById(id);
+
+        clientForm.setClient(client);
+        clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
+        clientForm.setContent("clientshow");
+
+        model.addAttribute("form", clientForm);
+
+        return "index";
     }
 
     @GetMapping("/new")
-    public String newClient(@ModelAttribute("clientNew") Client clientNew) {
-        return "client/new";
+    public String newClient(Model model) {
+
+        ClientForm clientForm = formManager.getClientForm();
+
+        clientForm.setClient(new Client());
+        clientForm.setTitle("Новый клиент");
+        clientForm.setContent("clientnew");
+
+        model.addAttribute("form", clientForm);
+
+        return "index";
     }
 
     @PostMapping()
-    public String createClient(@ModelAttribute("clientNew") Client clientNew, BindingResult bindingResult) throws Exception {
-        if (bindingResult.hasErrors()) {
-            return "client/new";
-        }
-        mainService.save(clientNew);
+    public String createClient(@ModelAttribute("form") ClientForm clientForm) throws Exception {
+        mainService.save(clientForm.getClient());
         return "redirect:/client";
     }
 
     @GetMapping("/{id}/edit")
     public String editClient(Model model, @PathVariable("id") UUID id) {
-        model.addAttribute("clientEdit", mainService.findById(id));
-        return "client/edit";
+
+        ClientForm clientForm = formManager.getClientForm();
+
+        Client client = (Client) mainService.findById(id);
+
+        clientForm.setClient(client);
+        clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
+        clientForm.setContent("clientedit");
+
+        model.addAttribute("form", clientForm);
+
+        return "index";
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@ModelAttribute("clientEdit") Client clientEdit, BindingResult bindingResult) throws Exception {
-        if (bindingResult.hasErrors()) {
-            return "client/edit";
-        }
-        mainService.save(clientEdit);
+    public String updateClient(@ModelAttribute("form") ClientForm clientForm, @PathVariable("id") UUID id) throws Exception {
+        Client client = clientForm.getClient();
+        client.setId(id);
+        mainService.save(client);
         return "redirect:/client";
     }
 

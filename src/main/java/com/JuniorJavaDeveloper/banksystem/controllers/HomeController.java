@@ -42,11 +42,14 @@ public class HomeController {
 
         HomeForm homeForm = formManager.getHomeForm();
 
+        homeForm.setTitle("Работа с кредитами");
+        homeForm.setContent("contentindex");
+
         homeForm.setBanksList(bankService.findAll());
         homeForm.setClientsList(clientService.findAll());
         homeForm.setCreditOffersList(creditOfferService.findAll());
 
-        model.addAttribute("homeForm", homeForm);
+        model.addAttribute("form", homeForm);
 
         return "index";
     }

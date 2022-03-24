@@ -7,24 +7,11 @@ import com.JuniorJavaDeveloper.banksystem.forms.menu.MenuForm;
 
 import java.util.List;
 
-public class HomeForm {
+public class HomeForm extends Form {
 
-    MenuForm menuForm;
-
-    List<Bank> banksList;
-    List<Client> clientsList;
-    List<CreditOffer> creditOffersList;
-
-    public HomeForm() {
-    }
-
-    public MenuForm getMenuForm() {
-        return menuForm;
-    }
-
-    public void setMenuForm(MenuForm menuForm) {
-        this.menuForm = menuForm;
-    }
+    private List<Bank> banksList;
+    private List<Client> clientsList;
+    private List<CreditOffer> creditOffersList;
 
     public List<Bank> getBanksList() {
         return banksList;

@@ -1,100 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head th:replace="head :: header(~{::title},~{})">
-    <title>Работа с кредитами</title>
+<head>
+    <title th:text="${form.getTitle()}" />
+    <link th:href="@{/static/css/index.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<div th:replace="header :: header (${homeForm.getMenuForm().getMenuList()})"></div>
+<div th:replace="header :: header (${form.getMenuForm().getMenuList()})"></div>
 
-<div class="wrap">
-    <div class="but">
-        <H3>Список банков</H3>
-        <a href="/bank/new">+ Создать банк</a>
-        <br/>
-        <hr/>
-        <div class="row" th:each="bank : ${homeForm.getBanksList()}">
-            <form class="formRow" th:method="DELETE"
-                  th:action="@{/bank/{id}(id=${bank.getId()})}"
-                  th:object="${bank}"
-                  accept-charset="UTF-8">
-                <input class="formButton" type="submit" value="Удалить">
-            </form>
-            <form class="formRow" th:method="GET"
-                  th:action="@{/bank/{id}/edit(id=${bank.getId()})}"
-                  th:object="${bank}"
-                  accept-charset="UTF-8">
-                <input class="formButton" type="submit" value="Изменить">
-            </form>
-            <a th:href="@{/bank/{id}(id=${bank.getId()})}">
-                <div class="button" th:text="${bank.getName()+' '
-                            + 'ИНН: ' + bank.getInn()+' '
-                            + 'БИК: ' + bank.getBic()}"></div>
-            </a>
-        </div>
-    </div>
-    <div class="but">
-        <H3>Список клиентов</H3>
-        <a href="/client/new">+ Создать клиента</a>
-        <br/>
-        <hr/>
-
-        <div>
-            <div class="row" th:each="client : ${homeForm.getClientsList()}">
-                <form class="formRow" th:method="DELETE"
-                      th:action="@{/client/{id}(id=${client.getId()})}"
-                      th:object="${client}"
-                      accept-charset="UTF-8">
-                    <input class="formButton" type="submit" value="Удалить">
-                </form>
-                <form class="formRow" th:method="GET"
-                      th:action="@{/clients/{id}/edit(id=${client.getId()})}"
-                      th:object="${client}"
-                      accept-charset="UTF-8">
-                    <input class="formButton" type="submit" value="Изменить">
-                </form>
-                <a th:href="@{/client/{id}(id=${client.getId()})}">
-                    <div class="button" th:text="${client.getFirstName()+' '
-                            + client.getLastName()+' '
-                            + client.getFatherName()+', '
-                            +'Паспорт: '+ client.getPasportNumber()+', '
-                            + client.getEmail()+', '
-                            +'Тел.: '+ client.getPhoneNumber()}">
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="wrap">
-    <div class="but">
-        <H3>Список кредитных предложений</H3>
-        <a href="/creditoffer/new">+ Создать кредитное предложение</a>
-        <br/>
-        <hr/>
-        <div>
-            <div class="row" th:each="creditOffer : ${homeForm.getCreditOffersList()}">
-                <form class="formRow" th:method="DELETE"
-                      th:action="@{/creditoffer/{id}(id=${creditOffer.getId()})}"
-                      th:object="${creditOffer}"
-                      accept-charset="UTF-8">
-                    <input class="formButton" type="submit" value="Удалить">
-                </form>
-                <form class="formRow" th:method="GET"
-                      th:action="@{/creditoffer/{id}/edit(id=${creditOffer.getId()})}"
-                      th:object="${creditOffer}"
-                      accept-charset="UTF-8">
-                    <input class="formButton" type="submit" value="Изменить">
-                </form>
-                <a th:href="@{/creditoffer/{id}(id=${creditOffer.getId()})}">
-                    <div class="button" th:text="${creditOffer.getBank().getName()+', '
-                   + 'Лимит: ' + creditOffer.getCreditLimit()+', '
-                   + 'Процент: ' + creditOffer.getInterestRate()}"></div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="content :: ${form.getContent()} (${form})"></div>
 
 <div th:replace="footer :: footer"></div>
 
