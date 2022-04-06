@@ -84,4 +84,8 @@ public class Client {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getName(){
+        return getLastName() + " " + getFirstName() + " " + getFatherName();
+    }
 }

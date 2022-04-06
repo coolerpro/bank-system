@@ -40,7 +40,7 @@ public class CreditOfferController {
 
         creditOffereForm.setTitle("Список кредитных предложений");
         creditOffereForm.setContent("creditofferlist");
-        creditOffereForm.setCreditOffersList(creditOfferService.findAll());
+        creditOffereForm.setCreditOfferList(creditOfferService.findAll());
 
         model.addAttribute("form", creditOffereForm);
 

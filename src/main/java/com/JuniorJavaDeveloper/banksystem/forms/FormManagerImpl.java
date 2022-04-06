@@ -42,5 +42,11 @@ public class FormManagerImpl implements FormManager {
         return bankForm;
     }
 
+    @Override
+    public CreditForm getCreditForm() {
 
+        CreditForm creditForm = new CreditForm();
+        creditForm.setMenuForm(menuManager.getMenuForm());
+        return creditForm;
+    }
 }

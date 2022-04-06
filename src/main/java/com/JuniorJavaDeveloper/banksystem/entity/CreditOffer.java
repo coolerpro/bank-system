@@ -54,4 +54,8 @@ public class CreditOffer {
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
     }
+
+    public String getName(){
+        return getBank().getName() + " " + getInterestRate() + " " + getCreditLimit();
+    }
 }

@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class CreditOfferForm extends Form{
 
-    private List<CreditOffer> creditOffersList;
+    private List<CreditOffer> creditOfferList;
     private CreditOffer creditOffer;
     private List<Bank>bankList;
     private UUID bankId;
@@ -37,11 +37,11 @@ public class CreditOfferForm extends Form{
         this.bankList = bankList;
     }
 
-    public List<CreditOffer> getCreditOffersList() {
-        return creditOffersList;
+    public List<CreditOffer> getCreditOfferList() {
+        return creditOfferList;
     }
 
-    public void setCreditOffersList(List<CreditOffer> creditOffersList) {
-        this.creditOffersList = creditOffersList;
+    public void setCreditOfferList(List<CreditOffer> creditOfferList) {
+        this.creditOfferList = creditOfferList;
     }
 }

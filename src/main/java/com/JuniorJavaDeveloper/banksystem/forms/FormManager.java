@@ -10,4 +10,6 @@ public interface FormManager {
 
     BankForm getBankForm();
 
+    CreditForm getCreditForm();
+
 }
