@@ -27,7 +27,7 @@ public class ClientsController {
     }
 
     @GetMapping()
-    public String clients(Model model) {
+    public String listAll(Model model) {
 
         ClientForm clientForm = formManager.getClientForm();
 
@@ -57,7 +57,7 @@ public class ClientsController {
     }
 
     @GetMapping("/new")
-    public String newClient(Model model) {
+    public String newElem(Model model) {
 
         ClientForm clientForm = formManager.getClientForm();
 
@@ -71,13 +71,13 @@ public class ClientsController {
     }
 
     @PostMapping()
-    public String createClient(@ModelAttribute("form") ClientForm clientForm) throws Exception {
+    public String create(@ModelAttribute("form") ClientForm clientForm) throws Exception {
         mainService.save(clientForm.getClient());
         return "redirect:/client";
     }
 
     @GetMapping("/{id}/edit")
-    public String editClient(Model model, @PathVariable("id") UUID id) {
+    public String edit(Model model, @PathVariable("id") UUID id) {
 
         ClientForm clientForm = formManager.getClientForm();
 
@@ -93,7 +93,7 @@ public class ClientsController {
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@ModelAttribute("form") ClientForm clientForm, @PathVariable("id") UUID id) throws Exception {
+    public String update(@ModelAttribute("form") ClientForm clientForm, @PathVariable("id") UUID id) throws Exception {
         Client client = clientForm.getClient();
         client.setId(id);
         mainService.save(client);
@@ -101,7 +101,7 @@ public class ClientsController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteClient(@PathVariable("id") UUID id) {
+    public String delete(@PathVariable("id") UUID id) {
         mainService.delete(id);
         return "redirect:/client";
     }

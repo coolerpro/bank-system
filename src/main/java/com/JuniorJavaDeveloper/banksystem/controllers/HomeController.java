@@ -38,7 +38,7 @@ public class HomeController {
     }
 
     @GetMapping()
-    public String banks(Model model) {
+    public String listAll(Model model) {
 
         HomeForm homeForm = formManager.getHomeForm();
 

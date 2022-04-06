@@ -33,7 +33,7 @@ public class BanksController {
     }
 
     @GetMapping()
-    public String banks(Model model) {
+    public String listAll(Model model) {
 
         BankForm bankForm = formManager.getBankForm();
 
@@ -65,7 +65,7 @@ public class BanksController {
     }
 
     @GetMapping("/new")
-    public String newBank(Model model) {
+    public String newElem(Model model) {
 
         BankForm bankForm = formManager.getBankForm();
 
@@ -79,14 +79,14 @@ public class BanksController {
     }
 
     @PostMapping()
-    public String createBank(@ModelAttribute("form") BankForm bankForm) throws Exception {
+    public String create(@ModelAttribute("form") BankForm bankForm) throws Exception {
 
         mainService.save(bankForm.getBank());
         return "redirect:/bank";
     }
 
     @GetMapping("/{id}/edit")
-    public String editBank(Model model, @PathVariable("id") UUID id) {
+    public String edit(Model model, @PathVariable("id") UUID id) {
 
         Bank bank = (Bank) mainService.findById(id);
 
@@ -104,7 +104,7 @@ public class BanksController {
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@ModelAttribute("form") BankForm bankForm, @PathVariable("id") UUID id) throws Exception {
+    public String update(@ModelAttribute("form") BankForm bankForm, @PathVariable("id") UUID id) throws Exception {
 
         Bank bank = bankForm.getBank();
         bank.setId(id);
@@ -113,7 +113,7 @@ public class BanksController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteBank(@PathVariable("id") UUID id) {
+    public String delete(@PathVariable("id") UUID id) {
         mainService.delete(id);
         return "redirect:/bank";
     }

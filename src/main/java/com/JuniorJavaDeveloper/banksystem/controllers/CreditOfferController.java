@@ -34,7 +34,7 @@ public class CreditOfferController {
     }
 
     @GetMapping()
-    public String banks(Model model) {
+    public String listAll(Model model) {
 
         CreditOfferForm creditOffereForm = formManager.getCreditOfferForm();
 
@@ -64,7 +64,7 @@ public class CreditOfferController {
     }
 
     @GetMapping("/new")
-    public String newClient(Model model) {
+    public String newElem(Model model) {
 
         CreditOfferForm creditOfferForm = formManager.getCreditOfferForm();
 
@@ -79,7 +79,7 @@ public class CreditOfferController {
     }
 
     @PostMapping()
-    public String createClient(@ModelAttribute("form") CreditOfferForm creditOfferForm) throws Exception {
+    public String create(@ModelAttribute("form") CreditOfferForm creditOfferForm) throws Exception {
 
         CreditOffer creditOffer = creditOfferForm.getCreditOffer();
         Bank bank = (Bank) bankService.findById(creditOfferForm.getBankId());
@@ -90,7 +90,7 @@ public class CreditOfferController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editClient(Model model, @PathVariable("id") UUID id) {
+    public String edit(Model model, @PathVariable("id") UUID id) {
 
         CreditOfferForm creditOfferForm = formManager.getCreditOfferForm();
 
@@ -107,7 +107,7 @@ public class CreditOfferController {
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@ModelAttribute("form") CreditOfferForm creditOfferForm, @PathVariable("id") UUID id) throws Exception {
+    public String update(@ModelAttribute("form") CreditOfferForm creditOfferForm, @PathVariable("id") UUID id) throws Exception {
 
         CreditOffer creditOffer = creditOfferForm.getCreditOffer();
         Bank bank = (Bank) bankService.findById(creditOfferForm.getBankId());
@@ -118,7 +118,7 @@ public class CreditOfferController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteClient(@PathVariable("id") UUID id) {
+    public String delete(@PathVariable("id") UUID id) {
         creditOfferService.delete(id);
         return "redirect:/creditoffer";
     }
