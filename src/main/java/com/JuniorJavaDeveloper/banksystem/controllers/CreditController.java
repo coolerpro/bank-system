@@ -92,18 +92,36 @@ public class CreditController {
     }
 
     @PostMapping("/calculation")
-    public String calculation(@ModelAttribute("form") CreditForm creditForm, Model model){
+    public String calculation(@ModelAttribute("form") CreditForm Form, Model model){
 
-        Bank bank = (Bank) bankService.findById(creditForm.getBankId());
-        Client client = (Client) clientService.findById(creditForm.getClientId());
-        CreditOffer creditOffer = creditOfferService.findById(creditForm.getCreditOfferId());
 
-        Credit credit = creditForm.getCredit();
+
+        Bank bank = (Bank) bankService.findById(Form.getBankId());
+        Client client = (Client) clientService.findById(Form.getClientId());
+        CreditOffer creditOffer = creditOfferService.findById(Form.getCreditOfferId());
+
+        Credit credit = Form.getCredit();
         credit.setBank(bank);
         credit.setClient(client);
         credit.setCreditOffer(creditOffer);
 
-        creditManager.calculateCredit(credit, creditForm.getDateFirstPay(), creditForm.getCountMonth());
+        creditManager.calculateCredit(credit, Form.getDateFirstPayment(), Form.getCountMonth());
+
+        CreditForm creditForm = formManager.getCreditForm();
+
+        creditForm.setTitle("Новый кредит, рассчет");
+        creditForm.setContent("creditnew");
+
+        creditForm.setCredit(credit);
+        creditForm.setDateFirstPayment(credit.getPaymentSchedule().getDateFirstPayment());
+        creditForm.setDateEndPayment(credit.getPaymentSchedule().getDateEndPayment());
+        creditForm.setCountMonth(credit.getPaymentSchedule().getPaymentMonths().size());
+
+        creditForm.setSum(credit.getSum());
+        creditForm.setSumBody(credit.getSumBody());
+        creditForm.setSumPercent(credit.getSumPercent());
+
+        creditForm.setPaymentMonths(credit.getPaymentSchedule().getPaymentMonths());
 
         model.addAttribute("form", creditForm);
 
@@ -111,8 +129,8 @@ public class CreditController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("form") ClientForm clientForm) throws Exception {
-        mainService.save(clientForm.getClient());
+    public String create(@ModelAttribute("form") CreditForm creditForm) throws Exception {
+        mainService.save(creditForm.getCredit());
         return "redirect:/client";
     }
 

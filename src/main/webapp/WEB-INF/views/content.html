@@ -377,7 +377,7 @@
 
         <label for="bankId">Банк: </label>
         <select th:field="${form.bankId}" id="bankId">
-            <option value=""> -- </option>
+            <option value=""> --</option>
             <option th:each="bank : ${form.getBankList()}"
                     th:value="${bank.getId()}"
                     th:utext="${bank.getName()}"/>
@@ -475,47 +475,167 @@
 
 <div th:fragment="creditnewbefor (form)">
 
-    <form th:method="POST" th:action="@{/credit/calculation}"
-          th:object="${form.credit}" accept-charset="UTF-16">
+    <div class="wrap">
+        <form th:method="POST" th:action="@{/credit/calculation}"
+              th:object="${form.credit}" accept-charset="UTF-16">
 
-        <label for="bankId">Банк: </label>
-        <select th:field="${form.bankId}" id="bankId">
-            <option value=""> -- </option>
-            <option th:each="bank : ${form.getBankList()}"
-                    th:value="${bank.getId()}"
-                    th:utext="${bank.getName()}"/>
-        </select>
+            <label for="bankId">Банк: </label>
+            <select th:field="${form.bankId}" id="bankId">
 
-        <label for="clientId">Клиент: </label>
-        <select th:field="${form.clientId}" id="clientId">
-            <option value=""> -- </option>
-            <option th:each="client : ${form.getClientList()}"
-                    th:value="${client.getId()}"
-                    th:utext="${client.getName()}"/>
-        </select>
+                <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
+                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"> </option>
 
-        <label for="creditOfferId">Кредитное предложеие: </label>
-        <select th:field="${form.creditOfferId}" id="creditOfferId">
-            <option value=""> -- </option>
-            <option th:each="creditOffer : ${form.getCreditOfferList()}"
-                    th:value="${creditOffer.getId()}"
-                    th:utext="${creditOffer.getName()}"/>
-        </select>
+                <option th:each="bank : ${form.getBankList()}"
+                        th:value="${bank.getId()}"
+                        th:text="${bank.getName()}"/>
+            </select>
+            <br/>
+            <br/>
 
-        <label for="sumBody">Сумма заема: </label>
-        <input type="text" th:field="*{sumBody}" id="sumBody"/>
+            <label for="clientId">Клиент: </label>
+            <select th:field="${form.clientId}" id="clientId">
 
-        <label for="countMonth">Количество месяцев: </label>
-        <input type="text" th:field="${form.countMonth}" id="countMonth"/>
+                <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
+                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"> </option>
 
-        <label for="dateFirstPay">Дата первого платежа:</label>
-        <input type="date" th:field="${form.dateFirstPay}" id="dateFirstPay"/>
 
-        <br/>
-        <br/>
+                <option th:each="client : ${form.getClientList()}"
+                        th:value="${client.getId()}"
+                        th:utext="${client.getName()}"/>
+            </select>
+            <br/>
+            <br/>
 
-        <input type="submit" value="Рассчитать">
-    </form>
+            <label for="creditOfferId">Кредитное предложеие: </label>
+            <select th:field="${form.creditOfferId}" id="creditOfferId">
+
+                <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
+                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"> </option>
+
+                <option th:each="creditOffer : ${form.getCreditOfferList()}"
+                        th:value="${creditOffer.getId()}"
+                        th:utext="${creditOffer.getName()}"/>
+            </select>
+            <br/>
+            <br/>
+
+            <label for="dateFirstPayment">Дата первого платежа:</label>
+            <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
+            <br/>
+            <br/>
+
+            <label for="countMonth">Количество месяцев: </label>
+            <input type="text" th:field="${form.countMonth}" id="countMonth"/>
+            <br/>
+            <br/>
+
+            <label for="sumBody">Сумма заема: </label>
+            <input type="text" th:field="*{sumBody}" id="sumBody"/>
+            <br/>
+            <br/>
+
+            <input type="submit" value="Рассчитать">
+        </form>
+    </div>
 </div>
+
+<div th:fragment="creditnew (form)">
+
+    <div class="wrap">
+        <form th:method="POST" th:action="@{/credit}"
+              th:object="${form.credit}" accept-charset="UTF-16">
+
+            <label for="bankId">Банк: </label>
+            <select th:field="${form.bankId}" id="bankId">
+
+                <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
+                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"> </option>
+
+                <option th:each="bank : ${form.getBankList()}"
+                        th:value="${bank.getId()}"
+                        th:text="${bank.getName()}"/>
+            </select>
+            <br/>
+            <br/>
+
+            <label for="clientId">Клиент: </label>
+            <select th:field="${form.clientId}" id="clientId">
+
+                <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
+                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"> </option>
+
+                <option th:each="client : ${form.getClientList()}"
+                        th:value="${client.getId()}"
+                        th:utext="${client.getName()}"/>
+            </select>
+            <br/>
+            <br/>
+
+            <label for="creditOfferId">Кредитное предложеие: </label>
+            <select th:field="${form.creditOfferId}" id="creditOfferId">
+
+                <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
+                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"> </option>
+
+                <option th:each="creditOffer : ${form.getCreditOfferList()}"
+                        th:value="${creditOffer.getId()}"
+                        th:utext="${creditOffer.getName()}"/>
+            </select>
+            <br/>
+            <br/>
+
+            <label for="dateFirstPayment">Дата первого платежа:</label>
+            <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
+            <br/>
+            <br/>
+
+            <label for="dateEndPayment">Дата последнего платежа:</label>
+            <input type="date" th:field="${form.dateEndPayment}" id="dateEndPayment"/>
+            <br/>
+            <br/>
+
+            <label for="countMonth">Количество месяцев: </label>
+            <input type="text" th:field="${form.countMonth}" id="countMonth"/>
+            <br/>
+            <br/>
+
+            <label for="sumBody">Сумма заема: </label>
+            <input type="text" th:field="${form.sumBody}" id="sumBody"/>
+            <br/>
+            <br/>
+
+            <label for="sumPercent">Сумма процентов: </label>
+            <input type="text" th:field="${form.sumPercent}" id="sumPercent"/>
+            <br/>
+            <br/>
+
+            <label for="sum">Общая сумма: </label>
+            <input type="text" th:field="${form.sum}" id="sum"/>
+            <br/>
+            <br/>
+
+            <p>График платежей:</p>
+            <table>
+                <tr class="row">
+                    <td>Дата</td>
+                    <td>Сумма платежа</td>
+                    <td>Сумма тела</td>
+                    <td>Сумма процентов</td>
+                    <td>Оплачен</td>
+                </tr>
+                <tr class="row" th:each="payment : ${form.getPaymentMonths()}">
+                    <td th:text="${payment.getPaymentDate()}"/>
+                    <td th:text="${payment.getPaymentSum()}"/>
+                    <td th:text="${payment.getSumBody()}"/>
+                    <td th:text="${payment.getSumpPercent()}"/>
+                    <td th:text="${payment.isPaid()}"/>
+                </tr>
+            </table>
+
+            <input type="submit" value="Сохранить">
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
