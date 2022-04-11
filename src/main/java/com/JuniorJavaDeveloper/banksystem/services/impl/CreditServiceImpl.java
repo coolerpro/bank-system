@@ -3,7 +3,10 @@ package com.JuniorJavaDeveloper.banksystem.services.impl;
 import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.entity.Credit;
+import com.JuniorJavaDeveloper.banksystem.entity.PaymentMonth;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditRepository;
+import com.JuniorJavaDeveloper.banksystem.repository.PaymentMonthRepository;
+import com.JuniorJavaDeveloper.banksystem.repository.PaymentScheduleRepository;
 import com.JuniorJavaDeveloper.banksystem.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +18,14 @@ import java.util.UUID;
 public class CreditServiceImpl implements CreditService {
 
     private CreditRepository creditRepository;
+    private PaymentScheduleRepository paymentScheduleRepository;
+    private PaymentMonthRepository paymentMonthRepository;
 
     @Autowired
-    public CreditServiceImpl(CreditRepository creditRepository) {
+    public CreditServiceImpl(CreditRepository creditRepository, PaymentScheduleRepository paymentScheduleRepository, PaymentMonthRepository paymentMonthRepository) {
         this.creditRepository = creditRepository;
+        this.paymentScheduleRepository = paymentScheduleRepository;
+        this.paymentMonthRepository = paymentMonthRepository;
     }
 
     @Override
@@ -49,6 +56,11 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public void save(Credit creditNew) throws Exception {
         checkFillings(creditNew);
+        paymentScheduleRepository.save(creditNew.getPaymentSchedule());
+        for (PaymentMonth paymentMonth:
+             creditNew.getPaymentSchedule().getPaymentMonths()) {
+            paymentMonthRepository.save(paymentMonth);
+        }
         creditRepository.save(creditNew);
     }
 

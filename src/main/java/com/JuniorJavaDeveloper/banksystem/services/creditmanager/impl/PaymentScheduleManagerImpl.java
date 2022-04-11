@@ -48,7 +48,7 @@ public class PaymentScheduleManagerImpl implements PaymentScheduleManager {
         }
 
         for (PaymentMonth payment : credit.getPaymentSchedule().getPaymentMonths()) {
-            sumPercent = sumPercent.add(payment.getSumpPercent());
+            sumPercent = sumPercent.add(payment.getSumPercent());
         }
 
         credit.setSumPercent(sumPercent);

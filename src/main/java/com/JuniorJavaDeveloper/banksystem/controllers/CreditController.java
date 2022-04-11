@@ -1,9 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
-import com.JuniorJavaDeveloper.banksystem.entity.Bank;
-import com.JuniorJavaDeveloper.banksystem.entity.Client;
-import com.JuniorJavaDeveloper.banksystem.entity.Credit;
-import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
+import com.JuniorJavaDeveloper.banksystem.entity.*;
 import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.CreditForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
@@ -17,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/credit")
@@ -92,18 +90,9 @@ public class CreditController {
     }
 
     @PostMapping("/calculation")
-    public String calculation(@ModelAttribute("form") CreditForm Form, Model model){
+    public String calculation(@ModelAttribute("form") CreditForm Form, Model model) {
 
-
-
-        Bank bank = (Bank) bankService.findById(Form.getBankId());
-        Client client = (Client) clientService.findById(Form.getClientId());
-        CreditOffer creditOffer = creditOfferService.findById(Form.getCreditOfferId());
-
-        Credit credit = Form.getCredit();
-        credit.setBank(bank);
-        credit.setClient(client);
-        credit.setCreditOffer(creditOffer);
+        Credit credit = getCreditByForm(Form);
 
         creditManager.calculateCredit(credit, Form.getDateFirstPayment(), Form.getCountMonth());
 
@@ -117,10 +106,6 @@ public class CreditController {
         creditForm.setDateEndPayment(credit.getPaymentSchedule().getDateEndPayment());
         creditForm.setCountMonth(credit.getPaymentSchedule().getPaymentMonths().size());
 
-        creditForm.setSum(credit.getSum());
-        creditForm.setSumBody(credit.getSumBody());
-        creditForm.setSumPercent(credit.getSumPercent());
-
         creditForm.setPaymentMonths(credit.getPaymentSchedule().getPaymentMonths());
 
         model.addAttribute("form", creditForm);
@@ -129,9 +114,11 @@ public class CreditController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("form") CreditForm creditForm) throws Exception {
-        mainService.save(creditForm.getCredit());
-        return "redirect:/client";
+    public String create(@ModelAttribute("form") CreditForm Form) throws Exception {
+        Credit credit = getCreditByForm(Form);
+
+        mainService.save(credit);
+        return "redirect:/credit";
     }
 
     @GetMapping("/{id}/edit")
@@ -162,5 +149,31 @@ public class CreditController {
     public String delete(@PathVariable("id") UUID id) {
         mainService.delete(id);
         return "redirect:/client";
+    }
+
+    private Credit getCreditByForm(CreditForm Form) {
+        Bank bank = (Bank) bankService.findById(Form.getBankId());
+        Client client = (Client) clientService.findById(Form.getClientId());
+        CreditOffer creditOffer = creditOfferService.findById(Form.getCreditOfferId());
+
+        Credit credit = Form.getCredit();
+        credit.setBank(bank);
+        credit.setClient(client);
+        credit.setCreditOffer(creditOffer);
+
+        if (Form.getPaymentMonths() != null) {
+
+            PaymentSchedule paymentSchedule = new PaymentSchedule();
+            Form.getPaymentMonths().stream().map((paymentMonth) -> {
+                paymentMonth.setPaymentSchedule(paymentSchedule);
+                return paymentMonth;
+            }).collect(Collectors.toList());
+            paymentSchedule.setDateFirstPayment(Form.getDateFirstPayment());
+            paymentSchedule.setDateEndPayment(Form.getDateEndPayment());
+            paymentSchedule.setPaymentMonths(Form.getPaymentMonths());
+            credit.setPaymentSchedule(paymentSchedule);
+        }
+
+        return credit;
     }
 }

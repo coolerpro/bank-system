@@ -483,7 +483,7 @@
             <select th:field="${form.bankId}" id="bankId">
 
                 <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
-                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"> </option>
+                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
 
                 <option th:each="bank : ${form.getBankList()}"
                         th:value="${bank.getId()}"
@@ -496,7 +496,7 @@
             <select th:field="${form.clientId}" id="clientId">
 
                 <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
-                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"> </option>
+                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"></option>
 
 
                 <option th:each="client : ${form.getClientList()}"
@@ -510,7 +510,7 @@
             <select th:field="${form.creditOfferId}" id="creditOfferId">
 
                 <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
-                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"> </option>
+                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
 
                 <option th:each="creditOffer : ${form.getCreditOfferList()}"
                         th:value="${creditOffer.getId()}"
@@ -549,7 +549,7 @@
             <select th:field="${form.bankId}" id="bankId">
 
                 <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
-                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"> </option>
+                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
 
                 <option th:each="bank : ${form.getBankList()}"
                         th:value="${bank.getId()}"
@@ -562,7 +562,7 @@
             <select th:field="${form.clientId}" id="clientId">
 
                 <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
-                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"> </option>
+                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"></option>
 
                 <option th:each="client : ${form.getClientList()}"
                         th:value="${client.getId()}"
@@ -575,7 +575,7 @@
             <select th:field="${form.creditOfferId}" id="creditOfferId">
 
                 <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
-                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"> </option>
+                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
 
                 <option th:each="creditOffer : ${form.getCreditOfferList()}"
                         th:value="${creditOffer.getId()}"
@@ -600,17 +600,17 @@
             <br/>
 
             <label for="sumBody">Сумма заема: </label>
-            <input type="text" th:field="${form.sumBody}" id="sumBody"/>
+            <input type="text" th:field="*{sumBody}" id="sumBody"/>
             <br/>
             <br/>
 
             <label for="sumPercent">Сумма процентов: </label>
-            <input type="text" th:field="${form.sumPercent}" id="sumPercent"/>
+            <input type="text" th:field="*{sumPercent}" id="sumPercent"/>
             <br/>
             <br/>
 
             <label for="sum">Общая сумма: </label>
-            <input type="text" th:field="${form.sum}" id="sum"/>
+            <input type="text" th:field="*{sum}" id="sum"/>
             <br/>
             <br/>
 
@@ -623,12 +623,22 @@
                     <td>Сумма процентов</td>
                     <td>Оплачен</td>
                 </tr>
-                <tr class="row" th:each="payment : ${form.getPaymentMonths()}">
-                    <td th:text="${payment.getPaymentDate()}"/>
-                    <td th:text="${payment.getPaymentSum()}"/>
-                    <td th:text="${payment.getSumBody()}"/>
-                    <td th:text="${payment.getSumpPercent()}"/>
-                    <td th:text="${payment.isPaid()}"/>
+                <tr class="row" th:each="payment, rowStat : ${form.paymentMonths}">
+                    <td>
+                        <input type="text" id="paymentDate" name="paymentDate"
+                               th:field="${form.paymentMonths[__${rowStat.index}__].paymentDate}"/></td>
+                    <td>
+                        <input type="text" id="paymentSum" name="paymentSum"
+                               th:field="${form.paymentMonths[__${rowStat.index}__].paymentSum}"/></td>
+                    <td>
+                        <input type="text" id="sumBody" name="sumBody"
+                               th:field="${form.paymentMonths[__${rowStat.index}__].sumBody}"/></td>
+                    <td>
+                        <input type="text" id="sumPercent" name="sumPercent"
+                               th:field="${form.paymentMonths[__${rowStat.index}__].sumPercent}"/></td>
+                    <td>
+                        <input type="checkbox" id="paid" name="paid"
+                               th:field="${form.paymentMonths[__${rowStat.index}__].paid}"/></td>
                 </tr>
             </table>
 

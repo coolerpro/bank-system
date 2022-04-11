@@ -25,7 +25,7 @@ public class PaymentMonthManagerImpl implements PaymentMonthManager {
 
         paymentMonth.setPaymentSum(paymentSum);
         paymentMonth.setSumBody(sumBody);
-        paymentMonth.setSumpPercent(paymentSum.subtract(sumBody));
+        paymentMonth.setSumPercent(paymentSum.subtract(sumBody));
 
         paymentMonthList.add(paymentMonth);
 

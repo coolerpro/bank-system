@@ -3,7 +3,6 @@ package com.JuniorJavaDeveloper.banksystem.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -29,7 +28,7 @@ public class PaymentMonth {
     private BigDecimal sumBody;
 
     @Column(name = "sumpercent")
-    private BigDecimal sumpPercent;
+    private BigDecimal sumPercent;
 
     @Column(name = "paid")
     private boolean paid;
@@ -82,11 +81,11 @@ public class PaymentMonth {
         this.sumBody = sumBody;
     }
 
-    public BigDecimal getSumpPercent() {
-        return sumpPercent;
+    public BigDecimal getSumPercent() {
+        return sumPercent;
     }
 
-    public void setSumpPercent(BigDecimal sumpPercent) {
-        this.sumpPercent = sumpPercent;
+    public void setSumPercent(BigDecimal sumPercent) {
+        this.sumPercent = sumPercent;
     }
 }
