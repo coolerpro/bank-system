@@ -3,37 +3,36 @@ package com.JuniorJavaDeveloper.banksystem.forms;
 import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
-import com.JuniorJavaDeveloper.banksystem.forms.menu.MenuForm;
 
 import java.util.List;
 
 public class HomeForm extends Form {
 
-    private List<Bank> banksList;
-    private List<Client> clientsList;
-    private List<CreditOffer> creditOffersList;
+    private List<Bank> bankList;
+    private List<Client> clientList;
+    private List<CreditOffer> creditOfferList;
 
-    public List<Bank> getBanksList() {
-        return banksList;
+    public List<Bank> getBankList() {
+        return bankList;
     }
 
-    public void setBanksList(List<Bank> banksList) {
-        this.banksList = banksList;
+    public void setBankList(List<Bank> bankList) {
+        this.bankList = bankList;
     }
 
-    public List<Client> getClientsList() {
-        return clientsList;
+    public List<Client> getClientList() {
+        return clientList;
     }
 
-    public void setClientsList(List<Client> clientsList) {
-        this.clientsList = clientsList;
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
     }
 
-    public List<CreditOffer> getCreditOffersList() {
-        return creditOffersList;
+    public List<CreditOffer> getCreditOfferList() {
+        return creditOfferList;
     }
 
-    public void setCreditOffersList(List<CreditOffer> creditOffersList) {
-        this.creditOffersList = creditOffersList;
+    public void setCreditOfferList(List<CreditOffer> creditOfferList) {
+        this.creditOfferList = creditOfferList;
     }
 }

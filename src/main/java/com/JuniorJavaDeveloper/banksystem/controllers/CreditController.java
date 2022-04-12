@@ -59,15 +59,15 @@ public class CreditController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
 
-        ClientForm clientForm = formManager.getClientForm();
+        CreditForm creditForm = formManager.getCreditForm();
 
-        Client client = (Client) mainService.findById(id);
+        Credit credit = (Credit) mainService.findById(id);
 
-        clientForm.setClient(client);
-        clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
-        clientForm.setContent("clientshow");
+        creditForm.setCredit(credit);
+        creditForm.setTitle("Кредит");
+        creditForm.setContent("creditshow");
 
-        model.addAttribute("form", clientForm);
+        model.addAttribute("form", creditForm);
 
         return "index";
     }
@@ -83,6 +83,48 @@ public class CreditController {
         creditForm.setClientList(clientService.findAll());
         creditForm.setCreditOfferList(creditOfferService.findAll());
         creditForm.setCredit(new Credit());
+
+        model.addAttribute("form", creditForm);
+
+        return "index";
+    }
+
+    @GetMapping("/bank/{id}/new")
+    public String newElemBank(Model model, @PathVariable("id") UUID id) {
+
+        Credit credit = new Credit();
+        Bank bank = (Bank) bankService.findById(id);
+        credit.setBank(bank);
+
+        CreditForm creditForm = formManager.getCreditForm();
+
+        creditForm.setTitle("Новый кредит");
+        creditForm.setContent("creditnewbefor");
+        creditForm.setBankList(bankService.findAll());
+        creditForm.setClientList(clientService.findAll());
+        creditForm.setCreditOfferList(creditOfferService.findAll());
+        creditForm.setCredit(credit);
+
+        model.addAttribute("form", creditForm);
+
+        return "index";
+    }
+
+    @GetMapping("/client/{id}/new")
+    public String newElemClient(Model model, @PathVariable("id") UUID id) {
+
+        CreditForm creditForm = formManager.getCreditForm();
+
+        Credit credit = new Credit();
+        Client client = (Client) clientService.findById(id);
+        credit.setClient(client);
+
+        creditForm.setTitle("Новый кредит");
+        creditForm.setContent("creditnewbefor");
+        creditForm.setBankList(bankService.findAll());
+        creditForm.setClientList(clientService.findAll());
+        creditForm.setCreditOfferList(creditOfferService.findAll());
+        creditForm.setCredit(credit);
 
         model.addAttribute("form", creditForm);
 
@@ -147,8 +189,9 @@ public class CreditController {
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") UUID id) {
+
         mainService.delete(id);
-        return "redirect:/client";
+        return "redirect:/credit";
     }
 
     private Credit getCreditByForm(CreditForm Form) {

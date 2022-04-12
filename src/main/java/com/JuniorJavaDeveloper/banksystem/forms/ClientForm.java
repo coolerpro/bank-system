@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ClientForm extends Form{
     private Client client;
-    private List<Client> clientsList;
+    private List<Client> clientList;
     private List<Credit> creditList;
 
     public Client getClient() {
@@ -26,11 +26,11 @@ public class ClientForm extends Form{
         this.creditList = creditList;
     }
 
-    public List<Client> getClientsList() {
-        return clientsList;
+    public List<Client> getClientList() {
+        return clientList;
     }
 
-    public void setClientsList(List<Client> clientsList) {
-        this.clientsList = clientsList;
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
     }
 }

@@ -1,15 +1,13 @@
 package com.JuniorJavaDeveloper.banksystem.services.impl;
 
-import com.JuniorJavaDeveloper.banksystem.entity.Bank;
-import com.JuniorJavaDeveloper.banksystem.entity.Client;
-import com.JuniorJavaDeveloper.banksystem.entity.Credit;
-import com.JuniorJavaDeveloper.banksystem.entity.PaymentMonth;
+import com.JuniorJavaDeveloper.banksystem.entity.*;
 import com.JuniorJavaDeveloper.banksystem.repository.CreditRepository;
 import com.JuniorJavaDeveloper.banksystem.repository.PaymentMonthRepository;
 import com.JuniorJavaDeveloper.banksystem.repository.PaymentScheduleRepository;
 import com.JuniorJavaDeveloper.banksystem.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -57,16 +55,22 @@ public class CreditServiceImpl implements CreditService {
     public void save(Credit creditNew) throws Exception {
         checkFillings(creditNew);
         paymentScheduleRepository.save(creditNew.getPaymentSchedule());
-        for (PaymentMonth paymentMonth:
-             creditNew.getPaymentSchedule().getPaymentMonths()) {
+        for (PaymentMonth paymentMonth :
+                creditNew.getPaymentSchedule().getPaymentMonths()) {
             paymentMonthRepository.save(paymentMonth);
         }
         creditRepository.save(creditNew);
     }
 
     @Override
+    @Transactional
     public void delete(UUID id) {
-        creditRepository.delete(creditRepository.getById(id));
+        Credit credit = creditRepository.getById(id);
+        PaymentSchedule paymentSchedule = credit.getPaymentSchedule();
+
+        paymentMonthRepository.deleteByPaymentSchedule(paymentSchedule);
+        paymentScheduleRepository.delete(paymentSchedule);
+        creditRepository.delete(credit);
     }
 
     private void checkFillings(Credit credit) throws Exception {

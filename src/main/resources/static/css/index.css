@@ -5,24 +5,43 @@
 }
 
 .wrap {
-    text-align: center;
     width: 100%;
+    position: relative;
 }
 
 .but {
-    display: inline-block;
     padding: 5px;
     border: 1px solid #029000;
     border-radius: 20px;
     background: #daefdb;
+    text-align: center;
+    display: table-cell;;
 }
 
-.row {
+.headTable {
     margin: 5px;
     border: 1px solid #029000;
     box-sizing: border-box;
     border-radius: 20px;
     background: #c2e9c3;
+}
+
+.row {
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid #029000;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: #c2e9c3;
+}
+
+.row:hover {
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid #5a8059;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background: #8fa88f;
 }
 
 .button {
@@ -44,6 +63,18 @@
     border: none;
     vertical-align: center;
     background-color: #9adb9d;
+    border-radius: 15px;
+    color: #0f3a10;
+    padding: 6px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+.formButton:hover {
+    cursor: pointer;
+    border: none;
+    vertical-align: center;
+    background-color: #54C559FF;
     border-radius: 15px;
     color: #0f3a10;
     padding: 6px 10px;

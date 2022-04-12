@@ -2,7 +2,6 @@ package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.forms.HomeForm;
-import com.JuniorJavaDeveloper.banksystem.forms.menu.MenuManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
@@ -45,9 +44,9 @@ public class HomeController {
         homeForm.setTitle("Работа с кредитами");
         homeForm.setContent("contentindex");
 
-        homeForm.setBanksList(bankService.findAll());
-        homeForm.setClientsList(clientService.findAll());
-        homeForm.setCreditOffersList(creditOfferService.findAll());
+        homeForm.setBankList(bankService.findAll());
+        homeForm.setClientList(clientService.findAll());
+        homeForm.setCreditOfferList(creditOfferService.findAll());
 
         model.addAttribute("form", homeForm);
 

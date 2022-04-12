@@ -11,4 +11,5 @@ import java.util.UUID;
 @Repository
 public interface PaymentMonthRepository extends JpaRepository<PaymentMonth, UUID> {
     List<PaymentMonth> findPaymentMonthsByPaymentSchedule(PaymentSchedule paymentSchedule);
+    void deleteByPaymentSchedule(PaymentSchedule paymentSchedule);
 }

@@ -13,6 +13,7 @@ public class MenuManagerImpl implements MenuManager {
         menuForm.addMenuPoint("Список банков", "bank");
         menuForm.addMenuPoint("Список клиентов", "client");
         menuForm.addMenuPoint("Спсок кредитных предложений", "creditoffer");
+        menuForm.addMenuPoint("Спсок кредитов", "credit");
     }
 
     public MenuForm getMenuForm() {

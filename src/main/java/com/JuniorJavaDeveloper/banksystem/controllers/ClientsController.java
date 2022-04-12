@@ -3,6 +3,7 @@ package com.JuniorJavaDeveloper.banksystem.controllers;
 import com.JuniorJavaDeveloper.banksystem.entity.Client;
 import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
+import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,12 +18,14 @@ import java.util.UUID;
 public class ClientsController {
 
     private final MainService mainService;
+    private final CreditService creditService;
     private final FormManager formManager;
 
     @Autowired
     public ClientsController(@Qualifier("clientServiceImpl") MainService mainService,
-                             FormManager formManager) {
+                             CreditService creditService, FormManager formManager) {
         this.mainService = mainService;
+        this.creditService = creditService;
         this.formManager = formManager;
     }
 
@@ -33,7 +36,7 @@ public class ClientsController {
 
         clientForm.setTitle("Список клиентов");
         clientForm.setContent("clientlist");
-        clientForm.setClientsList(mainService.findAll());
+        clientForm.setClientList(mainService.findAll());
 
         model.addAttribute("form", clientForm);
 
@@ -50,6 +53,7 @@ public class ClientsController {
         clientForm.setClient(client);
         clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
         clientForm.setContent("clientshow");
+        clientForm.setCreditList(creditService.findCreditsByClient(client));
 
         model.addAttribute("form", clientForm);
 
