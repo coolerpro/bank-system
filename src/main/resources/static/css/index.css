@@ -1,16 +1,14 @@
 body {
     display: block;
-    background: #63b78842;
     margin: 0;
 }
 
 .container {
-    background: #63b78842;
     padding: 6px;
 }
 
 .navbar {
-    text-align: center;
+    text-align: left;
     list-style: none;
     padding-left: 0;
     margin: 5px;
@@ -24,11 +22,11 @@ body {
 .navbar li {
     display: inline-flex;
     padding: 6px;
-    background: #37B96F;
+    border: 1px inset #37b96f6e;
 }
 
 .navbar li:hover {
-    background: #79CD9D;
+    background: #79CD9D77;
 }
 
 .content{
@@ -43,8 +41,8 @@ body {
 .but {
     padding: 5px;
     margin: 5px;
-    background: #edfdf4;
     display: table-cell;
+    border: 1px inset #37b96f6e;
 }
 .aAdd{
     width: 30px;
@@ -59,53 +57,48 @@ body {
 }
 
 table{
+    margin: 5px;
     display: inline-flex;
 }
 
 .tLabel {
-    background: #A5FFCC;
-    text-align: right;
+    text-align: left;
 }
 .tEdit {
-    background: #A5FFCC;
+    background: #37b96f17;
     text-align: left;
 }
 
 .headTable {
-    background: #A5FFCC;
+    background: #37b96f17;
     text-align: center;
 }
 
 .row {
     cursor: pointer;
-    background: #A5FFCC;
+    background: #37b96f17;
 }
 
 .row:hover {
-    background: #79CD9D;
+    background: #79CD9D77;
 }
 
 .formRow {
     display: inline-block;
-    background-color: #37B96F;
-}
-
-.formRow:hover {
-    background-color: #79CD9D;
 }
 
 .formButton {
     border: none;
     vertical-align: center;
-    background-color: #37B96F;
     padding: 6px 10px;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
+    border: 1px inset #37b96f6e;
 }
 
 .formButton:hover {
-    background-color: #79CD9D;
+    background-color: #79CD9D77;
 }
 
 .formButton:hover {
@@ -122,6 +115,7 @@ table{
 
 .buttonDel:hover {
     cursor: pointer;
+    background-color: #CD797977;
 }
 
 .buttonEdit {
@@ -134,4 +128,5 @@ table{
 
 .buttonEdit:hover {
     cursor: pointer;
+    background-color: #7991CD77;
 }
