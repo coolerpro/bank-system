@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <body>
 
-<div th:fragment="contentindex (form)">
+<div class="content" th:fragment="contentindex (form)">
     <div class="wrap">
         <div class="but">
-            <H3>Список банков</H3>
-            <hr/>
-            <a href="/bank/new">+ Создать банк</a>
-            <br/>
+            <h4>Список банков</h4>
+            <a href="/bank/new">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Наименование</td>
@@ -27,24 +27,24 @@
                         <form class="formRow" th:method="DELETE"
                               th:action="@{/bank/{id}(id=${bank.getId()})}"
                               th:object="${bank}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Удалить">
+                              accept-charset="UTF-16">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                         <form class="formRow" th:method="GET"
                               th:action="@{/bank/{id}/edit(id=${bank.getId()})}"
                               th:object="${bank}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Изменить">
+                              accept-charset="UTF-16">
+                            <input class="buttonEdit" type="submit" value="Изменить">
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
         <div class="but">
-            <H3>Список клиентов</H3>
-            <hr/>
-            <a href="/client/new">+ Создать клиента</a>
-            <br/>
+            <h4>Список клиентов</h4>
+            <a href="/client/new">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>ФИО</td>
@@ -65,27 +65,26 @@
                         <form class="formRow" th:method="DELETE"
                               th:action="@{/client/{id}(id=${client.getId()})}"
                               th:object="${client}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Удалить">
+                              accept-charset="UTF-16">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                         <form class="formRow" th:method="GET"
                               th:action="@{/clients/{id}/edit(id=${client.getId()})}"
                               th:object="${client}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Изменить">
+                              accept-charset="UTF-16">
+                            <input class="buttonEdit" type="submit" value="Изменить">
                         </form>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
-    <br/>
     <div class="wrap">
         <div class="but">
-            <H3>Список кредитных предложений</H3>
-            <hr/>
-            <a href="/creditoffer/new">+ Создать кредитное предложение</a>
-            <br/>
+            <h4>Список кредитных предложений</h4>
+            <a href="/creditoffer/new">
+                <div class="aAdd"></div>
+            </a>
             <div>
                 <table>
                     <tr class="headTable">
@@ -105,13 +104,13 @@
                                   th:action="@{/creditoffer/{id}(id=${creditOffer.getId()})}"
                                   th:object="${creditOffer}"
                                   accept-charset="UTF-16">
-                                <input class="formButton" type="submit" value="Удалить">
+                                <input class="buttonDel" type="submit" value="Удалить">
                             </form>
                             <form class="formRow" th:method="GET"
                                   th:action="@{/creditoffer/{id}/edit (id=${creditOffer.getId()})}"
                                   th:object="${creditOffer}"
                                   accept-charset="UTF-16">
-                                <input class="formButton" type="submit" value="Изменить">
+                                <input class="buttonEdit" type="submit" value="Изменить">
                             </form>
                         </td>
                     </tr>
@@ -122,13 +121,13 @@
 </div>
 
 
-<div th:fragment="banklist (form)">
+<div class="content" th:fragment="banklist (form)">
     <div class="wrap">
         <div class="but">
-            <H3>Список банков</H3>
-            <hr/>
-            <a href="/bank/new">+ Создать банк</a>
-            <br/>
+            <h4>Список банков</h4>
+            <a href="/bank/new">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Наименование</td>
@@ -147,94 +146,105 @@
                         <form class="formRow" th:method="DELETE"
                               th:action="@{/bank/{id}(id=${bank.getId()})}"
                               th:object="${bank}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Удалить">
+                              accept-charset="UTF-16">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                         <form class="formRow" th:method="GET"
                               th:action="@{/bank/{id}/edit(id=${bank.getId()})}"
                               th:object="${bank}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Изменить">
+                              accept-charset="UTF-16">
+                            <input class="buttonEdit" type="submit" value="Изменить">
                         </form>
                     </td>
                 </tr>
             </table>
-            <hr/>
         </div>
     </div>
 </div>
 
-<div th:fragment="bankedit (form)">
+<div class="content" th:fragment="bankedit (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Изменить банк</h3>
-            <hr/>
+            <h4>Изменить банк</h4>
             <form th:method="PATCH" th:action="@{/bank/{id}(id=${form.bank.getId()})}"
-                  th:object="${form.bank}" accept-charset="UTF-8">
-
-                <label for="name">Банк: </label>
-                <input type="text" th:field="*{name}" id="name"/>
-
-                <label for="inn">ИНН: </label>
-                <input type="text" th:field="*{inn}" id="inn"/>
-
-                <label for="bic">БИК: </label>
-                <input type="text" th:field="*{bic}" id="bic"/>
-
+                  th:object="${form.bank}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Наименование:</td>
+                        <td class="tEdit"><input type="text" th:field="*{name}" id="name"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">ИНН:</td>
+                        <td class="tEdit"><input type="text" th:field="*{inn}" id="inn"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">БИК:</td>
+                        <td class="tEdit"><input type="text" th:field="*{bic}" id="bic"/></td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Сохранить!">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="banknew (form)">
+<div class="content" th:fragment="banknew (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Новый банк</h3>
-            <hr/>
+            <h4>Новый банк</h4>
             <form th:method="POST" th:action="@{/bank}"
-                  th:object="${form.bank}" accept-charset="UTF-8">
-
-                <label for="name">Банк: </label>
-                <input type="text" th:field="*{name}" id="name"/>
-
-                <label for="inn">ИНН: </label>
-                <input type="text" th:field="*{inn}" id="inn"/>
-
-                <label for="bic">БИК: </label>
-                <input type="text" th:field="*{bic}" id="bic"/>
-
+                  th:object="${form.bank}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Наименование:</td>
+                        <td class="tEdit"><input type="text" th:field="*{name}" id="name"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">ИНН:</td>
+                        <td class="tEdit"><input type="text" th:field="*{inn}" id="inn"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">БИК:</td>
+                        <td class="tEdit"><input type="text" th:field="*{bic}" id="bic"/></td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Создать!">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="bankshow (form)">
+<div class="content" th:fragment="bankshow (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Банк</h3>
-            <hr/>
-            <p th:text="${form.bank.getName()}"></p>
-            <p th:text="${form.bank.getInn()}"></p>
-            <p th:text="${form.bank.getBic()}"></p>
+            <h4>Банк</h4>
+            <table>
+                <tr>
+                    <td class="tLabel">Наименование:</td>
+                    <td class="tEdit" th:text="${form.bank.getName()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">ИНН:</td>
+                    <td class="tEdit" th:text="${form.bank.getInn()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">БИК:</td>
+                    <td class="tEdit" th:text="${form.bank.getBic()}"/>
+                </tr>
+            </table>
             <br/>
             <form class="formRow" th:method="DELETE"
                   th:action="@{/bank/{id}(id=${form.bank.getId()})}"
                   th:object="${form.bank}"
-                  accept-charset="UTF-8">
+                  accept-charset="UTF-16">
                 <input class="formButton" type="submit" value="Удалить">
             </form>
             <form class="formRow" th:method="GET"
                   th:action="@{/bank/{id}/edit(id=${form.bank.getId()})}"
                   th:object="${form.bank}"
-                  accept-charset="UTF-8">
+                  accept-charset="UTF-16">
                 <input class="formButton" type="submit" value="Изменить">
             </form>
         </div>
@@ -242,10 +252,10 @@
     <br/>
     <div class="wrap">
         <div class="but">
-            <H3>Список кредитных предложений банка</H3>
-            <hr/>
-            <a href="/creditoffer/new">+ Создать кредитное предложение</a>
-            <br/>
+            <h4>Список кредитных предложений банка</h4>
+            <a th:href="@{/creditoffer/bank/{id}/new(id=${form.bank.getId()})}">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Банк</td>
@@ -264,24 +274,23 @@
                               th:action="@{/creditoffer/{id}(id=${creditOffer.getId()})}"
                               th:object="${creditOffer}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Удалить">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                         <form class="formRow" th:method="GET"
                               th:action="@{/creditoffer/{id}/edit (id=${creditOffer.getId()})}"
                               th:object="${creditOffer}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Изменить">
+                            <input class="buttonEdit" type="submit" value="Изменить">
                         </form>
                     </td>
                 </tr>
             </table>
-            <hr/>
         </div>
         <div class="but">
-            <H3>Список кредитов банка</H3>
-            <hr/>
-            <a th:href="@{/credit/bank/{id}/new(id=${form.bank.getId()})}">+ Оформить кредит</a>
-            <br/>
+            <h4>Список кредитов банка</h4>
+            <a th:href="@{/credit/bank/{id}/new(id=${form.bank.getId()})}">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Клиент</td>
@@ -299,7 +308,7 @@
                               th:action="@{/credit/{id}(id=${credit.getId()})}"
                               th:object="${credit}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Удалить">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>
@@ -309,13 +318,13 @@
 </div>
 
 
-<div th:fragment="clientlist (form)">
+<div class="content" th:fragment="clientlist (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Список клиентов</h3>
-            <hr/>
-            <a href="/client/new">+ Создать клиента</a>
-            <br/>
+            <h4>Список клиентов</h4>
+            <a href="/client/new">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>ФИО</td>
@@ -336,97 +345,119 @@
                         <form class="formRow" th:method="DELETE"
                               th:action="@{/client/{id}(id=${client.getId()})}"
                               th:object="${client}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Удалить">
+                              accept-charset="UTF-16">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                         <form class="formRow" th:method="GET"
                               th:action="@{/client/{id}/edit(id=${client.getId()})}"
                               th:object="${client}"
-                              accept-charset="UTF-8">
-                            <input class="formButton" type="submit" value="Изменить">
+                              accept-charset="UTF-16">
+                            <input class="buttonEdit" type="submit" value="Изменить">
                         </form>
                     </td>
                 </tr>
             </table>
-            <hr/>
         </div>
     </div>
 </div>
 
-<div th:fragment="clientnew (form)">
+<div class="content" th:fragment="clientnew (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Новый клиент</h3>
-            <hr/>
+            <h4>Новый клиент</h4>
             <form th:method="POST" th:action="@{/client}"
-                  th:object="${form.client}" accept-charset="UTF-8">
-
-                <label for="firstName">Имя: </label>
-                <input type="text" th:field="*{firstName}" id="firstName"/>
-
-                <label for="lastName">Фамилия: </label>
-                <input type="text" th:field="*{lastName}" id="lastName"/>
-
-                <label for="fatherName">Отчество: </label>
-                <input type="text" th:field="*{fatherName}" id="fatherName"/>
-
+                  th:object="${form.client}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Фамилия:</td>
+                        <td class="tEdit"><input type="text" th:field="*{lastName}" id="lastName"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Имя:</td>
+                        <td class="tEdit"><input type="text" th:field="*{firstName}" id="firstName"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Отчество:</td>
+                        <td class="tEdit"><input type="text" th:field="*{fatherName}" id="fatherName"/></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Паспорт:</td>
+                        <td class="tEdit"><input type="text" th:field="*{pasportNumber}" id="pasportNumber"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Email:</td>
+                        <td class="tEdit"><input type="text" th:field="*{email}" id="email"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Тел:</td>
+                        <td class="tEdit"><input type="text" th:field="*{phoneNumber}" id="phoneNumber"/></td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
-                <label for="email">Email: </label>
-                <input type="text" th:field="*{email}" id="email"/>
-                <br/>
-                <br/>
-                <label for="pasportNumber">Паспорт: </label>
-                <input type="text" th:field="*{pasportNumber}" id="pasportNumber"/>
-                <br/>
-                <br/>
-                <label for="phoneNumber">Номер телефона: </label>
-                <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-
-                <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Создать!">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="clientshow (form)">
+<div class="content" th:fragment="clientshow (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Клиент</h3>
-            <hr/>
-            <p th:text="${form.client.getFirstName()}"></p>
-            <p th:text="${form.client.getLastName()}"></p>
-            <p th:text="${form.client.getFatherName()}"></p>
-            <p th:text="${form.client.getEmail()}"></p>
-            <p th:text="${form.client.getPasportNumber()}"></p>
-            <p th:text="${form.client.getPhoneNumber()}"></p>
+            <h4>Клиент</h4>
+            <table>
+                <tr>
+                    <td class="tLabel">Фамилия:</td>
+                    <td class="tEdit" th:text="${form.client.getLastName()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Имя:</td>
+                    <td class="tEdit" th:text="${form.client.getFirstName()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Отчество:</td>
+                    <td class="tEdit" th:text="${form.client.getFatherName()}"/>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td class="tLabel">Паспорт:</td>
+                    <td class="tEdit" th:text="${form.client.getPasportNumber()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Email:</td>
+                    <td class="tEdit" th:text="${form.client.getEmail()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Тел:</td>
+                    <td class="tEdit" th:text="${form.client.getPhoneNumber()}"/>
+                </tr>
+            </table>
             <br/>
             <form class="formRow"
                   th:method="DELETE"
                   th:action="@{/client/{id}(id=${form.client.getId()})}"
                   th:object="${client}"
-                  accept-charset="UTF-8">
+                  accept-charset="UTF-16">
                 <input class="formButton" type="submit" value="Удалить">
             </form>
             <form class="formRow"
                   th:method="GET"
                   th:action="@{/client/{id}/edit(id=${form.client.getId()})}"
                   th:object="${client}"
-                  accept-charset="UTF-8">
+                  accept-charset="UTF-16">
                 <input class="formButton" type="submit" value="Изменить">
             </form>
         </div>
     </div>
+    <br/>
     <div class="wrap">
         <div class="but">
-            <H3>Список кредитов слиента</H3>
-            <hr/>
-            <a th:href="@{/credit/client/{id}/new(id=${form.client.getId()})}">+ Оформить кредит</a>
-            <br/>
+            <h4>Список кредитов слиента</h4>
+            <a th:href="@{/credit/client/{id}/new(id=${form.client.getId()})}">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Банк</td>
@@ -444,7 +475,7 @@
                               th:action="@{/credit/{id}(id=${credit.getId()})}"
                               th:object="${credit}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Удалить">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>
@@ -453,38 +484,42 @@
     </div>
 </div>
 
-<div th:fragment="clientedit (form)">
+<div class="content" th:fragment="clientedit (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Изменить клиента</h3>
-            <hr/>
+            <h4>Изменить клиента</h4>
             <form th:method="PATCH" th:action="@{/client/{id}(id=${form.client.getId()})}"
-                  th:object="${form.client}" accept-charset="UTF-8">
+                  th:object="${form.client}" accept-charset="UTF-16">
 
-                <label for="firstName">Имя: </label>
-                <input type="text" th:field="*{firstName}" id="firstName"/>
-                <label for="lastName">Фамилия: </label>
-                <input type="text" th:field="*{lastName}" id="lastName"/>
-                <label for="fatherName">Отчество: </label>
-                <input type="text" th:field="*{fatherName}" id="fatherName"/>
-
+                <table>
+                    <tr>
+                        <td class="tLabel">Фамилия:</td>
+                        <td class="tEdit"><input type="text" th:field="*{lastName}" id="lastName"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Имя:</td>
+                        <td class="tEdit"><input type="text" th:field="*{firstName}" id="firstName"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Отчество:</td>
+                        <td class="tEdit"><input type="text" th:field="*{fatherName}" id="fatherName"/></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Паспорт:</td>
+                        <td class="tEdit"><input type="text" th:field="*{pasportNumber}" id="pasportNumber"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Email:</td>
+                        <td class="tEdit"><input type="text" th:field="*{email}" id="email"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Тел:</td>
+                        <td class="tEdit"><input type="text" th:field="*{phoneNumber}" id="phoneNumber"/></td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
-                <label for="email">Email: </label>
-                <input type="text" th:field="*{email}" id="email"/>
-                <br/>
-                <br/>
-                <label for="pasportNumber">Паспорт: </label>
-                <input type="text" th:field="*{pasportNumber}" id="pasportNumber"/>
-                <br/>
-                <br/>
-                <label for="phoneNumber">Номер телефона: </label>
-                <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
-
-                <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Сохранить!">
             </form>
         </div>
@@ -492,13 +527,13 @@
 </div>
 
 
-<div th:fragment="creditofferlist (form)">
+<div class="content" th:fragment="creditofferlist (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Список кредитных предложений</h3>
-            <hr/>
-            <a href="/creditoffer/new">+ Создать кредитное предложение</a>
-            <br/>
+            <h4>Список кредитных предложений</h4>
+            <a href="/creditoffer/new">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Банк</td>
@@ -517,104 +552,121 @@
                               th:action="@{/creditoffer/{id}(id=${creditOffer.getId()})}"
                               th:object="${creditOffer}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Удалить">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                         <form class="formRow" th:method="GET"
                               th:action="@{/creditoffer/{id}/edit (id=${creditOffer.getId()})}"
                               th:object="${creditOffer}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Изменить">
+                            <input class="buttonEdit" type="submit" value="Изменить">
                         </form>
                     </td>
                 </tr>
             </table>
-            <hr/>
         </div>
     </div>
 </div>
 
-<div th:fragment="creditoffernew (form)">
+<div class="content" th:fragment="creditoffernew (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Новое кредитное предложение</h3>
-            <hr/>
+            <h4>Новое кредитное предложение</h4>
             <form th:method="POST" th:action="@{/creditoffer}"
-                  th:object="${form.creditOffer}" accept-charset="UTF-8">
+                  th:object="${form.creditOffer}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Банк:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.bankId}" id="bankId">
+                                <option th:value="(*{bank == null} ? null : *{bank.getId()})"
+                                        th:text="(*{bank == null } ? '-' : *{bank.getName()})">
 
-                <label for="bankId">Банк: </label>
-                <select th:field="${form.bankId}" id="bankId">
-                    <option value=""> --</option>
-                    <option th:each="bank : ${form.getBankList()}"
-                            th:value="${bank.getId()}"
-                            th:utext="${bank.getName()}"/>
-                </select>
-
-                <label for="creditLimit">Лимит: </label>
-                <input type="text" th:field="*{creditLimit}" id="creditLimit"/>
-
-                <label for="interestRate">Процент: </label>
-                <input type="text" th:field="*{interestRate}" id="interestRate"/>
-
+                                <option th:each="bank : ${form.getBankList()}"
+                                        th:value="${bank.getId()}"
+                                        th:utext="${bank.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Максимальный лимит:</td>
+                        <td class="tEdit"><input type="text" th:field="*{creditLimit}" id="creditLimit"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Процентная ставка:</td>
+                        <td class="tEdit"><input type="text" th:field="*{interestRate}" id="interestRate"/></td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Создать!">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="creditoffershow (form)">
+<div class="content" th:fragment="creditoffershow (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Кредитное предложение</h3>
-            <hr/>
-            <p th:text="${form.creditOffer.getBank().getName()}"></p>
-            <p th:text="${form.creditOffer.getCreditLimit()}"></p>
-            <p th:text="${form.creditOffer.getInterestRate()}"></p>
+            <h4>Кредитное предложение</h4>
+            <table>
+                <tr>
+                    <td class="tLabel">Банк:</td>
+                    <td class="tEdit" th:text="${form.creditOffer.getBank().getName()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Максимальный лимит:</td>
+                    <td class="tEdit" th:text="${form.creditOffer.getCreditLimit()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Процентная ставка:</td>
+                    <td class="tEdit" th:text="${form.creditOffer.getInterestRate()}"/>
+                </tr>
+            </table>
             <br/>
             <form class="formRow"
                   th:method="DELETE"
                   th:action="@{/creditoffer/{id}(id=${form.creditOffer.getId()})}"
-                  accept-charset="UTF-8">
+                  accept-charset="UTF-16">
                 <input class="formButton" type="submit" value="Удалить">
             </form>
             <form class="formRow"
                   th:method="GET"
                   th:action="@{/creditoffer/{id}/edit(id=${form.creditOffer.getId()})}"
-                  accept-charset="UTF-8">
+                  accept-charset="UTF-16">
                 <input class="formButton" type="submit" value="Изменить">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="creditofferedit (form)">
+<div class="content" th:fragment="creditofferedit (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Изменить кредитное предложение</h3>
-            <hr/>
+            <h4>Изменить кредитное предложение</h4>
             <form th:method="PATCH" th:action="@{/creditoffer/{id}(id=${form.creditOffer.getId()})}"
-                  th:object="${form.creditOffer}" accept-charset="UTF-8">
-
-                <label for="bankId">Банк: </label>
-                <select th:field="${form.bankId}" id="bankId">
-                    <option th:value="*{bank.getId()}"
-                            th:utext="*{bank.getName()}"></option>
-                    <option th:each="bank : ${form.getBankList()}"
-                            th:value="${bank.getId()}"
-                            th:utext="${bank.getName()}"/>
-                </select>
-
-                <label for="creditLimit">Лимит: </label>
-                <input type="text" th:field="*{creditLimit}" id="creditLimit"/>
-
-                <label for="interestRate">Процент: </label>
-                <input type="text" th:field="*{interestRate}" id="interestRate"/>
-
+                  th:object="${form.creditOffer}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Банк:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.bankId}" id="bankId">
+                                <option th:value="*{bank.getId()}"
+                                        th:utext="*{bank.getName()}"></option>
+                                <option th:each="bank : ${form.getBankList()}"
+                                        th:value="${bank.getId()}"
+                                        th:utext="${bank.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Максимальный лимит:</td>
+                        <td class="tEdit"><input type="text" th:field="*{creditLimit}" id="creditLimit"/></td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Процентная ставка:</td>
+                        <td class="tEdit"><input type="text" th:field="*{interestRate}" id="interestRate"/></td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Сохранить!">
             </form>
         </div>
@@ -622,13 +674,13 @@
 </div>
 
 
-<div th:fragment="creditlist (form)">
+<div class="content" th:fragment="creditlist (form)">
     <div class="wrap">
         <div class="but">
-            <H3>Список всех кредитов</H3>
-            <hr/>
-            <a href="/credit/new">+ Создать кредит</a>
-            <br/>
+            <h4>Список всех кредитов</h4>
+            <a href="/credit/new">
+                <div class="aAdd"></div>
+            </a>
             <table>
                 <tr class="headTable">
                     <td>Банк</td>
@@ -648,165 +700,186 @@
                               th:action="@{/credit/{id}(id=${credit.getId()})}"
                               th:object="${credit}"
                               accept-charset="UTF-16">
-                            <input class="formButton" type="submit" value="Удалить">
+                            <input class="buttonDel" type="submit" value="Удалить">
                         </form>
                     </td>
                 </tr>
             </table>
-            <hr/>
         </div>
     </div>
 </div>
 
-<div th:fragment="creditnewbefor (form)">
+<div class="content" th:fragment="creditnewbefor (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Новый кредит</h3>
-            <hr/>
+            <h4>Новый кредит</h4>
             <form th:method="POST" th:action="@{/credit/calculation}"
                   th:object="${form.credit}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Банк:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.bankId}" id="bankId">
 
-                <label for="bankId">Банк: </label>
-                <select th:field="${form.bankId}" id="bankId">
+                                <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
+                                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
 
-                    <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
-                            th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
+                                <option th:each="bank : ${form.getBankList()}"
+                                        th:value="${bank.getId()}"
+                                        th:text="${bank.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Клиент:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.clientId}" id="clientId">
 
-                    <option th:each="bank : ${form.getBankList()}"
-                            th:value="${bank.getId()}"
-                            th:text="${bank.getName()}"/>
-                </select>
+                                <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
+                                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"></option>
+
+                                <option th:each="client : ${form.getClientList()}"
+                                        th:value="${client.getId()}"
+                                        th:utext="${client.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Кредитное предложеие:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.creditOfferId}" id="creditOfferId">
+
+                                <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
+                                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
+
+                                <option th:each="creditOffer : ${form.getCreditOfferList()}"
+                                        th:value="${creditOffer.getId()}"
+                                        th:utext="${creditOffer.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Дата первого платежа:</td>
+                        <td class="tEdit">
+                            <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Количество месяцев:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="${form.countMonth}" id="countMonth"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Сумма заема:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="*{sumBody}" id="sumBody"/>
+                        </td>
+                    </tr>
+                </table>
                 <br/>
-                <br/>
-
-                <label for="clientId">Клиент: </label>
-                <select th:field="${form.clientId}" id="clientId">
-
-                    <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
-                            th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"></option>
-
-
-                    <option th:each="client : ${form.getClientList()}"
-                            th:value="${client.getId()}"
-                            th:utext="${client.getName()}"/>
-                </select>
-                <br/>
-                <br/>
-
-                <label for="creditOfferId">Кредитное предложеие: </label>
-                <select th:field="${form.creditOfferId}" id="creditOfferId">
-
-                    <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
-                            th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
-
-                    <option th:each="creditOffer : ${form.getCreditOfferList()}"
-                            th:value="${creditOffer.getId()}"
-                            th:utext="${creditOffer.getName()}"/>
-                </select>
-                <br/>
-                <br/>
-
-                <label for="dateFirstPayment">Дата первого платежа:</label>
-                <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
-                <br/>
-                <br/>
-
-                <label for="countMonth">Количество месяцев: </label>
-                <input type="text" th:field="${form.countMonth}" id="countMonth"/>
-                <br/>
-                <br/>
-
-                <label for="sumBody">Сумма заема: </label>
-                <input type="text" th:field="*{sumBody}" id="sumBody"/>
-                <br/>
-                <br/>
-
                 <input class="formButton" type="submit" value="Рассчитать">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="creditnew (form)">
+<div class="content" th:fragment="creditnew (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Предварительный рассчет кредита</h3>
-            <hr/>
+            <h4>Предварительный рассчет кредита</h4>
+
             <form th:method="POST" th:action="@{/credit}"
                   th:object="${form.credit}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Банк:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.bankId}" id="bankId">
 
-                <label for="bankId">Банк: </label>
-                <select th:field="${form.bankId}" id="bankId">
+                                <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
+                                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
 
-                    <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
-                            th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
+                                <option th:each="bank : ${form.getBankList()}"
+                                        th:value="${bank.getId()}"
+                                        th:text="${bank.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Клиент:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.clientId}" id="clientId">
 
-                    <option th:each="bank : ${form.getBankList()}"
-                            th:value="${bank.getId()}"
-                            th:text="${bank.getName()}"/>
-                </select>
-                <br/>
-                <br/>
+                                <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
+                                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"></option>
 
-                <label for="clientId">Клиент: </label>
-                <select th:field="${form.clientId}" id="clientId">
+                                <option th:each="client : ${form.getClientList()}"
+                                        th:value="${client.getId()}"
+                                        th:utext="${client.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Кредитное предложеие:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.creditOfferId}" id="creditOfferId">
 
-                    <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
-                            th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName()})"></option>
+                                <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
+                                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
 
-                    <option th:each="client : ${form.getClientList()}"
-                            th:value="${client.getId()}"
-                            th:utext="${client.getName()}"/>
-                </select>
-                <br/>
-                <br/>
-
-                <label for="creditOfferId">Кредитное предложеие: </label>
-                <select th:field="${form.creditOfferId}" id="creditOfferId">
-
-                    <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
-                            th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
-
-                    <option th:each="creditOffer : ${form.getCreditOfferList()}"
-                            th:value="${creditOffer.getId()}"
-                            th:utext="${creditOffer.getName()}"/>
-                </select>
-                <br/>
-                <br/>
-
-                <label for="dateFirstPayment">Дата первого платежа:</label>
-                <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
-                <br/>
-                <br/>
-
-                <label for="dateEndPayment">Дата последнего платежа:</label>
-                <input type="date" th:field="${form.dateEndPayment}" id="dateEndPayment"/>
-                <br/>
-                <br/>
-
-                <label for="countMonth">Количество месяцев: </label>
-                <input type="text" th:field="${form.countMonth}" id="countMonth"/>
-                <br/>
-                <br/>
-
-                <label for="sumBody">Сумма заема: </label>
-                <input type="text" th:field="*{sumBody}" id="sumBody"/>
-                <br/>
-                <br/>
-
-                <label for="sumPercent">Сумма процентов: </label>
-                <input type="text" th:field="*{sumPercent}" id="sumPercent"/>
-                <br/>
-                <br/>
-
-                <label for="sum">Общая сумма: </label>
-                <input type="text" th:field="*{sum}" id="sum"/>
-                <br/>
-                <br/>
-
+                                <option th:each="creditOffer : ${form.getCreditOfferList()}"
+                                        th:value="${creditOffer.getId()}"
+                                        th:utext="${creditOffer.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Дата первого платежа:</td>
+                        <td class="tEdit">
+                            <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Дата последнего платежа:</td>
+                        <td class="tEdit">
+                            <input type="date" th:field="${form.dateEndPayment}" id="dateEndPayment"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Количество месяцев:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="${form.countMonth}" id="countMonth"/>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Сумма заема:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="*{sumBody}" id="sumBody"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Сумма процентов:</td>
+                        <td class="tEdit" >
+                            <input type="text" th:field="*{sumPercent}" id="sumPercent"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Общая сумма:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="*{sum}" id="sum"/>
+                        </td>
+                    </tr>
+                </table>
                 <p>График платежей:</p>
                 <table>
-                    <tr class="row">
+                    <tr class="headTable">
                         <td>Дата</td>
                         <td>Сумма платежа</td>
                         <td>Сумма тела</td>
@@ -831,28 +904,59 @@
                                    th:field="${form.paymentMonths[__${rowStat.index}__].paid}"/></td>
                     </tr>
                 </table>
-
+                <br/>
                 <input class="formButton" type="submit" value="Сохранить">
             </form>
         </div>
     </div>
 </div>
 
-<div th:fragment="creditshow (form)">
+<div class="content" th:fragment="creditshow (form)">
     <div class="wrap">
         <div class="but">
-            <h3>Кредит</h3>
-            <hr/>
-            <p th:text="'Банк: ' + ${form.credit.getBank().getName()}"/>
-            <p th:text="'Клиент: ' + ${form.credit.getClient().getName()}"/>
-            <p th:text="'Кредитное предложеие: ' + ${form.credit.getCreditOffer().getName()}"/>
-            <p th:text="'Дата первого платежа: ' + ${form.credit.getPaymentSchedule().getDateFirstPayment()}"/>
-            <p th:text="'Дата последнего платежа: ' + ${form.credit.getPaymentSchedule().getDateEndPayment()}"/>
-            <p th:text="'Количество месяцев: ' + ${form.credit.getPaymentSchedule().getPaymentMonths().size()}"/>
-            <p th:text="'Сумма заема: ' + ${form.credit.getSumBody()}"/>
-            <p th:text="'Сумма процентов: ' + ${form.credit.getSumPercent()}"/>
-            <p th:text="'Общая сумма: ' + ${form.credit.getSum()}"/>
-
+            <h4>Кредит</h4>
+            <table>
+                <tr>
+                    <td class="tLabel">Банк:</td>
+                    <td class="tEdit" th:text="${form.credit.getBank().getName()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Клиент:</td>
+                    <td class="tEdit" th:text="${form.credit.getClient().getName()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Кредитное предложеие:</td>
+                    <td class="tEdit" th:text="${form.credit.getCreditOffer().getName()}"/>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td class="tLabel">Дата первого платежа:</td>
+                    <td class="tEdit" th:text="${form.credit.getPaymentSchedule().getDateFirstPayment()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Дата последнего платежа:</td>
+                    <td class="tEdit" th:text="${form.credit.getPaymentSchedule().getDateEndPayment()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Количество месяцев:</td>
+                    <td class="tEdit" th:text="${form.credit.getPaymentSchedule().getPaymentMonths().size()}"/>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td class="tLabel">Сумма заема:</td>
+                    <td class="tEdit" th:text="${form.credit.getSumBody()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Сумма процентов:</td>
+                    <td class="tEdit" th:text="${form.credit.getSumPercent()}"/>
+                </tr>
+                <tr>
+                    <td class="tLabel">Общая сумма:</td>
+                    <td class="tEdit" th:text="${form.credit.getSum()}"/>
+                </tr>
+            </table>
             <p>График платежей:</p>
             <table>
                 <tr class="row">

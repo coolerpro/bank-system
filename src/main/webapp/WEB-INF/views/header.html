@@ -3,14 +3,13 @@
 <body>
 <div th:fragment="header (menu)">
     <div class="container">
-            <ul class="navbar">
-                <li class="menuButton" th:each="point : ${menu}">
-                    <a th:href="@{'/'+ ${point.getHrefPoint()}}"
-                       th:text="${point.getNamePoint()}"></a>
-                </li>
-            </ul>
+        <ul class="navbar">
+            <a th:each="point : ${menu}"
+               th:href="@{'/'+ ${point.getHrefPoint()}}">
+                <li th:text="${point.getNamePoint()}"/>
+            </a>
+        </ul>
     </div>
-    <hr/>
 </div>
 </body>
 </html>

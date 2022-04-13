@@ -77,6 +77,24 @@ public class CreditOfferController {
 
         return "index";
     }
+    @GetMapping("/bank/{id}/new")
+    public String newElemByBank(Model model, @PathVariable("id") UUID id) {
+
+        CreditOfferForm creditOfferForm = formManager.getCreditOfferForm();
+
+        Bank bank = (Bank) bankService.findById(id);
+        CreditOffer creditOffer = new CreditOffer();
+        creditOffer.setBank(bank);
+
+        creditOfferForm.setTitle("Новое кредитное предложение");
+        creditOfferForm.setContent("creditoffernew");
+        creditOfferForm.setCreditOffer(creditOffer);
+        creditOfferForm.setBankList(bankService.findAll());
+
+        model.addAttribute("form", creditOfferForm);
+
+        return "index";
+    }
 
     @PostMapping()
     public String create(@ModelAttribute("form") CreditOfferForm creditOfferForm) throws Exception {
