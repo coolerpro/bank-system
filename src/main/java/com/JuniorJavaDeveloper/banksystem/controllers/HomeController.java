@@ -5,8 +5,9 @@ import com.JuniorJavaDeveloper.banksystem.forms.HomeForm;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
+import com.JuniorJavaDeveloper.banksystem.services.impl.BankServiceImpl;
+import com.JuniorJavaDeveloper.banksystem.services.impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,8 +26,8 @@ public class HomeController {
 
     @Autowired
     public HomeController(CreditOfferService creditOfferService,
-                          @Qualifier("bankServiceImpl") MainService bankService,
-                          @Qualifier("clientServiceImpl") MainService clientService,
+                          BankServiceImpl bankService,
+                          ClientServiceImpl clientService,
                           CreditService creditService,
                           FormManager formManager) {
         this.creditOfferService = creditOfferService;

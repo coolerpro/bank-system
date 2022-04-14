@@ -5,8 +5,8 @@ import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
+import com.JuniorJavaDeveloper.banksystem.services.impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +22,9 @@ public class ClientsController {
     private final FormManager formManager;
 
     @Autowired
-    public ClientsController(@Qualifier("clientServiceImpl") MainService mainService,
-                             CreditService creditService, FormManager formManager) {
+    public ClientsController(ClientServiceImpl mainService,
+                             CreditService creditService,
+                             FormManager formManager) {
         this.mainService = mainService;
         this.creditService = creditService;
         this.formManager = formManager;

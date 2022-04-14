@@ -4,14 +4,12 @@ import com.JuniorJavaDeveloper.banksystem.entity.Bank;
 import com.JuniorJavaDeveloper.banksystem.entity.CreditOffer;
 import com.JuniorJavaDeveloper.banksystem.forms.CreditOfferForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
-import com.JuniorJavaDeveloper.banksystem.forms.HomeForm;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
+import com.JuniorJavaDeveloper.banksystem.services.impl.BankServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -26,7 +24,7 @@ public class CreditOfferController {
 
     @Autowired
     public CreditOfferController(CreditOfferService creditOfferService,
-                                 @Qualifier("bankServiceImpl") MainService bankService,
+                                 BankServiceImpl bankService,
                                  FormManager formManager) {
         this.creditOfferService = creditOfferService;
         this.bankService = bankService;
