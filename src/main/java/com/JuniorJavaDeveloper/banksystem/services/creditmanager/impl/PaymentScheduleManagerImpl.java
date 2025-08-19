@@ -35,27 +35,25 @@ public class PaymentScheduleManagerImpl implements PaymentScheduleManager {
         BigDecimal sumCredit = BigDecimal.ZERO;
         BigDecimal sumPercent = BigDecimal.ZERO;
         List<BigDecimal> paysBodyMonth = new ArrayList<>();
+        List<BigDecimal> paysPercentMonth = new ArrayList<>();
 
-        sumCredit = calculateCredit(credit, countMonth, sumCredit, paysBodyMonth);
-        BigDecimal payMonth = sumCredit.divide(BigDecimal.valueOf(countMonth), 2, RoundingMode.HALF_UP);
+        sumCredit = calculateCredit(credit, countMonth, sumCredit, paysBodyMonth, paysPercentMonth);
 
         List<LocalDate> dateList = scheduleManager.calculateSchedule(dateFirstPay, countMonth);
         paymentSchedule.setDateFirstPayment(dateFirstPay);
         paymentSchedule.setDateEndPayment(dateList.get(dateList.size() - 1));
 
         for (int i = 0; i < countMonth; i++) {
-            paymentMonthManager.addPaymentMonth(credit, dateList.get(i), payMonth, paysBodyMonth.get(i));
-        }
-
-        for (PaymentMonth payment : credit.getPaymentSchedule().getPaymentMonths()) {
-            sumPercent = sumPercent.add(payment.getSumPercent());
+            BigDecimal payMonth = paysBodyMonth.get(i).add(paysPercentMonth.get(i));
+            paymentMonthManager.addPaymentMonth(credit, dateList.get(i), payMonth, paysBodyMonth.get(i), paysPercentMonth.get(i));
+            sumPercent = sumPercent.add(paysPercentMonth.get(i));
         }
 
         credit.setSumPercent(sumPercent);
-        credit.setSum(payMonth.multiply(BigDecimal.valueOf(countMonth)));
+        credit.setSum(sumCredit);
     }
 
-    private BigDecimal calculateCredit(Credit credit, int countMonth, BigDecimal sumCredit, List<BigDecimal> paysBodyMonth) {
+    private BigDecimal calculateCredit(Credit credit, int countMonth, BigDecimal sumCredit, List<BigDecimal> paysBodyMonth, List<BigDecimal> paysPercentMonth) {
 
         BigDecimal percentYear = credit.getCreditOffer().getInterestRate();
         BigDecimal ratioMonth = percentYear.divide(BigDecimal.valueOf(12), 6, RoundingMode.HALF_UP).divide(BigDecimal.valueOf(100), 6, RoundingMode.HALF_UP);
@@ -67,13 +65,14 @@ public class PaymentScheduleManagerImpl implements PaymentScheduleManager {
             BigDecimal payMonthBody = sumBodyBalance.divide(BigDecimal.valueOf(i), 2, RoundingMode.HALF_UP);
             paysBodyMonth.add(payMonthBody);
 
-            BigDecimal payMonthPercent = sumBodyBalance.multiply(ratioMonth);
+            BigDecimal payMonthPercent = sumBodyBalance.multiply(ratioMonth).setScale(2, RoundingMode.HALF_UP);
+            paysPercentMonth.add(payMonthPercent);
 
             sumCredit = sumCredit.add(payMonthPercent).add(payMonthBody);
             sumBodyBalance = sumBodyBalance.subtract(payMonthBody);
 
         }
 
-        return sumCredit;
+        return sumCredit.setScale(2, RoundingMode.HALF_UP);
     }
 }
