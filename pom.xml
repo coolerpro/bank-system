@@ -8,7 +8,7 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.JuniorJavaDeveloper</groupId>
+	<groupId>com.juniorjavadeveloper</groupId>
 	<artifactId>bank-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
