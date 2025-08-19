@@ -1,7 +1,6 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.entity.*;
-import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.CreditForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
@@ -168,25 +167,28 @@ public class CreditController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") UUID id) {
 
-        ClientForm clientForm = formManager.getClientForm();
+        CreditForm creditForm = formManager.getCreditForm();
 
-        Client client = (Client) mainService.findById(id);
+        Credit credit = (Credit) mainService.findById(id);
 
-        clientForm.setClient(client);
-        clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
-        clientForm.setContent("clientedit");
+        creditForm.setCredit(credit);
+        creditForm.setTitle("Изменить кредит");
+        creditForm.setContent("creditedit");
+        creditForm.setBankList(bankService.findAll());
+        creditForm.setClientList(clientService.findAll());
+        creditForm.setCreditOfferList(creditOfferService.findAll());
 
-        model.addAttribute("form", clientForm);
+        model.addAttribute("form", creditForm);
 
         return "index";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("form") ClientForm clientForm, @PathVariable("id") UUID id) throws Exception {
-        Client client = clientForm.getClient();
-        client.setId(id);
-        mainService.save(client);
-        return "redirect:/client";
+    public String update(@ModelAttribute("form") CreditForm creditForm, @PathVariable("id") UUID id) throws Exception {
+        Credit credit = getCreditByForm(creditForm);
+        credit.setId(id);
+        mainService.save(credit);
+        return "redirect:/credit";
     }
 
     @DeleteMapping("/{id}")
