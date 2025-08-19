@@ -911,6 +911,123 @@
     </div>
 </div>
 
+<div class="content" th:fragment="creditedit (form)">
+    <div class="wrap">
+        <div class="but">
+            <h4>Изменить кредит</h4>
+            <form th:method="PATCH" th:action="@{/credit/{id}(id=${form.credit.getId()})}"
+                  th:object="${form.credit}" accept-charset="UTF-16">
+                <table>
+                    <tr>
+                        <td class="tLabel">Банк:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.bankId}" id="bankId">
+                                <option th:value="(${form.credit.getBank() == null} ? null : ${form.credit.getBank().getId()})"
+                                        th:text="(${form.credit.getBank() == null } ? '-' : ${form.credit.getBank().getName()})"></option>
+                                <option th:each="bank : ${form.getBankList()}"
+                                        th:value="${bank.getId()}"
+                                        th:text="${bank.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Клиент:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.clientId}" id="clientId">
+                                <option th:value="(${form.credit.getClient() == null} ? null : ${form.credit.getClient().getId()})"
+                                        th:text="(${form.credit.getClient() == null } ? '-' : ${form.credit.getClient().getName(', ')})"></option>
+                                <option th:each="client : ${form.getClientList()}"
+                                        th:value="${client.getId()}"
+                                        th:utext="${client.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Кредитное предложеие:</td>
+                        <td class="tEdit">
+                            <select th:field="${form.creditOfferId}" id="creditOfferId">
+                                <option th:value="(${form.credit.getCreditOffer() == null} ? null : ${form.credit.getCreditOffer().getId()})"
+                                        th:text="(${form.credit.getCreditOffer() == null } ? '-' : ${form.credit.getCreditOffer().getName()})"></option>
+                                <option th:each="creditOffer : ${form.getCreditOfferList()}"
+                                        th:value="${creditOffer.getId()}"
+                                        th:utext="${creditOffer.getName()}"/>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Дата первого платежа:</td>
+                        <td class="tEdit">
+                            <input type="date" th:field="${form.dateFirstPayment}" id="dateFirstPayment"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Дата последнего платежа:</td>
+                        <td class="tEdit">
+                            <input type="date" th:field="${form.dateEndPayment}" id="dateEndPayment"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Количество месяцев:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="${form.countMonth}" id="countMonth"/>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td class="tLabel">Сумма заема:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="*{sumBody}" id="sumBody"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Сумма процентов:</td>
+                        <td class="tEdit" >
+                            <input type="text" th:field="*{sumPercent}" id="sumPercent"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tLabel">Общая сумма:</td>
+                        <td class="tEdit">
+                            <input type="text" th:field="*{sum}" id="sum"/>
+                        </td>
+                    </tr>
+                </table>
+                <p>График платежей:</p>
+                <table>
+                    <tr class="headTable">
+                        <td>Дата</td>
+                        <td>Сумма платежа</td>
+                        <td>Сумма тела</td>
+                        <td>Сумма процентов</td>
+                        <td>Оплачен</td>
+                    </tr>
+                    <tr class="row" th:each="payment, rowStat : ${form.paymentMonths}">
+                        <td>
+                            <input type="text" id="paymentDate" name="paymentDate"
+                                   th:field="${form.paymentMonths[__${rowStat.index}__].paymentDate}"/></td>
+                        <td>
+                            <input type="text" id="paymentSum" name="paymentSum"
+                                   th:field="${form.paymentMonths[__${rowStat.index}__].paymentSum}"/></td>
+                        <td>
+                            <input type="text" id="sumBody" name="sumBody"
+                                   th:field="${form.paymentMonths[__${rowStat.index}__].sumBody}"/></td>
+                        <td>
+                            <input type="text" id="sumPercent" name="sumPercent"
+                                   th:field="${form.paymentMonths[__${rowStat.index}__].sumPercent}"/></td>
+                        <td>
+                            <input type="checkbox" id="paid" name="paid"
+                                   th:field="${form.paymentMonths[__${rowStat.index}__].paid}"/></td>
+                    </tr>
+                </table>
+                <br/>
+                <input class="formButton" type="submit" value="Сохранить">
+            </form>
+        </div>
+    </div>
+</div>
 <div class="content" th:fragment="creditshow (form)">
     <div class="wrap">
         <div class="but">
