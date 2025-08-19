@@ -75,29 +75,28 @@ public class CreditController {
     }
 
     @GetMapping("/new")
-    public String newElem(Model model) {
+    public String newElem(Model model,
+                          @RequestParam(value = "bankId", required = false) UUID bankId,
+                          @RequestParam(value = "clientId", required = false) UUID clientId) {
 
-        CreditForm creditForm = formManager.getCreditForm();
+        Credit credit = new Credit();
 
-        creditForm.setTitle("Новый кредит");
-        creditForm.setContent("creditnewbefor");
-        creditForm.setBankList(bankService.findAll());
-        creditForm.setClientList(clientService.findAll());
-        creditForm.setCreditOfferList(creditOfferService.findAll());
-        creditForm.setCredit(new Credit());
+        if (bankId != null) {
+            Bank bank = (Bank) bankService.findById(bankId);
+            credit.setBank(bank);
+        }
 
-        model.addAttribute("form", creditForm);
+        if (clientId != null) {
+            Client client = (Client) clientService.findById(clientId);
+            credit.setClient(client);
+        }
+
+        populateCreditForm(model, credit);
 
         return "index";
     }
 
-    @GetMapping("/bank/{id}/new")
-    public String newElemBank(Model model, @PathVariable("id") UUID id) {
-
-        Credit credit = new Credit();
-        Bank bank = (Bank) bankService.findById(id);
-        credit.setBank(bank);
-
+    private void populateCreditForm(Model model, Credit credit) {
         CreditForm creditForm = formManager.getCreditForm();
 
         creditForm.setTitle("Новый кредит");
@@ -108,29 +107,6 @@ public class CreditController {
         creditForm.setCredit(credit);
 
         model.addAttribute("form", creditForm);
-
-        return "index";
-    }
-
-    @GetMapping("/client/{id}/new")
-    public String newElemClient(Model model, @PathVariable("id") UUID id) {
-
-        CreditForm creditForm = formManager.getCreditForm();
-
-        Credit credit = new Credit();
-        Client client = (Client) clientService.findById(id);
-        credit.setClient(client);
-
-        creditForm.setTitle("Новый кредит");
-        creditForm.setContent("creditnewbefor");
-        creditForm.setBankList(bankService.findAll());
-        creditForm.setClientList(clientService.findAll());
-        creditForm.setCreditOfferList(creditOfferService.findAll());
-        creditForm.setCredit(credit);
-
-        model.addAttribute("form", creditForm);
-
-        return "index";
     }
 
     @PostMapping("/calculation")

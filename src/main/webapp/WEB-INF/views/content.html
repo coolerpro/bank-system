@@ -288,7 +288,7 @@
         </div>
         <div class="but">
             <h4>Список кредитов банка</h4>
-            <a th:href="@{/credit/bank/{id}/new(id=${form.bank.getId()})}">
+            <a th:href="@{/credit/new(bankId=${form.bank.getId()})}">
                 <div class="aAdd"></div>
             </a>
             <table>
@@ -455,7 +455,7 @@
     <div class="wrap">
         <div class="but">
             <h4>Список кредитов слиента</h4>
-            <a th:href="@{/credit/client/{id}/new(id=${form.client.getId()})}">
+            <a th:href="@{/credit/new(clientId=${form.client.getId()})}">
                 <div class="aAdd"></div>
             </a>
             <table>
