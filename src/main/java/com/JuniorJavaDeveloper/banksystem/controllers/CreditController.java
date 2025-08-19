@@ -1,15 +1,14 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.entity.*;
-import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.CreditForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
+import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import com.JuniorJavaDeveloper.banksystem.services.creditmanager.CreditManager;
 import com.JuniorJavaDeveloper.banksystem.services.impl.BankServiceImpl;
 import com.JuniorJavaDeveloper.banksystem.services.impl.ClientServiceImpl;
-import com.JuniorJavaDeveloper.banksystem.services.impl.CreditServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/credit")
 public class CreditController {
 
-    private final MainService mainService;
+    private final CreditService creditService;
     private final FormManager formManager;
     private final MainService bankService;
     private final CreditOfferService creditOfferService;
@@ -30,13 +29,13 @@ public class CreditController {
     private final CreditManager creditManager;
 
     @Autowired
-    public CreditController(CreditServiceImpl mainService,
+    public CreditController(CreditService creditService,
                             BankServiceImpl bankService,
                             CreditOfferService creditOfferService,
                             ClientServiceImpl clientService,
                             FormManager formManager,
                             CreditManager creditManager) {
-        this.mainService = mainService;
+        this.creditService = creditService;
         this.formManager = formManager;
         this.bankService = bankService;
         this.creditOfferService = creditOfferService;
@@ -51,7 +50,7 @@ public class CreditController {
 
         creditForm.setTitle("Список всех кредитов");
         creditForm.setContent("creditlist");
-        creditForm.setCreditList(mainService.findAll());
+        creditForm.setCreditList(creditService.findAll());
 
         model.addAttribute("form", creditForm);
 
@@ -63,7 +62,7 @@ public class CreditController {
 
         CreditForm creditForm = formManager.getCreditForm();
 
-        Credit credit = (Credit) mainService.findById(id);
+        Credit credit = (Credit) creditService.findById(id);
 
         creditForm.setCredit(credit);
         creditForm.setTitle("Кредит");
@@ -161,38 +160,45 @@ public class CreditController {
     public String create(@ModelAttribute("form") CreditForm Form) throws Exception {
         Credit credit = getCreditByForm(Form);
 
-        mainService.save(credit);
+        creditService.save(credit);
         return "redirect:/credit";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") UUID id) {
 
-        ClientForm clientForm = formManager.getClientForm();
+        CreditForm creditForm = formManager.getCreditForm();
 
-        Client client = (Client) mainService.findById(id);
+        Credit credit = (Credit) creditService.findById(id);
 
-        clientForm.setClient(client);
-        clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
-        clientForm.setContent("clientedit");
+        creditForm.setCredit(credit);
+        creditForm.setTitle("Изменить кредит");
+        creditForm.setContent("creditedit");
+        creditForm.setBankList(bankService.findAll());
+        creditForm.setClientList(clientService.findAll());
+        creditForm.setCreditOfferList(creditOfferService.findAll());
+        creditForm.setDateFirstPayment(credit.getPaymentSchedule().getDateFirstPayment());
+        creditForm.setDateEndPayment(credit.getPaymentSchedule().getDateEndPayment());
+        creditForm.setCountMonth(credit.getPaymentSchedule().getPaymentMonths().size());
+        creditForm.setPaymentMonths(credit.getPaymentSchedule().getPaymentMonths());
 
-        model.addAttribute("form", clientForm);
+        model.addAttribute("form", creditForm);
 
         return "index";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("form") ClientForm clientForm, @PathVariable("id") UUID id) throws Exception {
-        Client client = clientForm.getClient();
-        client.setId(id);
-        mainService.save(client);
-        return "redirect:/client";
+    public String update(@ModelAttribute("form") CreditForm creditForm, @PathVariable("id") UUID id) throws Exception {
+        Credit credit = getCreditByForm(creditForm);
+        credit.setId(id);
+        creditService.save(credit);
+        return "redirect:/credit";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") UUID id) {
 
-        mainService.delete(id);
+        creditService.delete(id);
         return "redirect:/credit";
     }
 
