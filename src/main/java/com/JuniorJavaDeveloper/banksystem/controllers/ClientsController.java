@@ -5,7 +5,6 @@ import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
-import com.JuniorJavaDeveloper.banksystem.services.impl.ClientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +16,12 @@ import java.util.UUID;
 @RequestMapping("/client")
 public class ClientsController {
 
-    private final MainService mainService;
+    private final MainService<Client> mainService;
     private final CreditService creditService;
     private final FormManager formManager;
 
     @Autowired
-    public ClientsController(ClientServiceImpl mainService,
+    public ClientsController(MainService<Client> mainService,
                              CreditService creditService,
                              FormManager formManager) {
         this.mainService = mainService;
@@ -49,7 +48,7 @@ public class ClientsController {
 
         ClientForm clientForm = formManager.getClientForm();
 
-        Client client = (Client) mainService.findById(id);
+        Client client = mainService.findById(id);
 
         clientForm.setClient(client);
         clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
@@ -86,7 +85,7 @@ public class ClientsController {
 
         ClientForm clientForm = formManager.getClientForm();
 
-        Client client = (Client) mainService.findById(id);
+        Client client = mainService.findById(id);
 
         clientForm.setClient(client);
         clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
