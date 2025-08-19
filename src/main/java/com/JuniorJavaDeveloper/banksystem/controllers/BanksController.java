@@ -6,7 +6,6 @@ import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import com.JuniorJavaDeveloper.banksystem.services.CreditService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
-import com.JuniorJavaDeveloper.banksystem.services.impl.BankServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +17,13 @@ import java.util.UUID;
 @RequestMapping("/bank")
 public class BanksController {
 
-    private final MainService mainService;
+    private final MainService<Bank> mainService;
     private final CreditOfferService creditOfferService;
     private final CreditService creditService;
     private final FormManager formManager;
 
     @Autowired
-    public BanksController(BankServiceImpl mainService,
+    public BanksController(MainService<Bank> mainService,
                            CreditOfferService creditOfferService,
                            CreditService creditService,
                            FormManager formManager) {
@@ -51,7 +50,7 @@ public class BanksController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
 
-        Bank bank = (Bank) mainService.findById(id);
+        Bank bank = mainService.findById(id);
 
         BankForm bankForm = formManager.getBankForm();
 
@@ -90,7 +89,7 @@ public class BanksController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") UUID id) {
 
-        Bank bank = (Bank) mainService.findById(id);
+        Bank bank = mainService.findById(id);
 
         BankForm bankForm = formManager.getBankForm();
 

@@ -1,15 +1,11 @@
 package com.JuniorJavaDeveloper.banksystem.controllers;
 
 import com.JuniorJavaDeveloper.banksystem.entity.*;
-import com.JuniorJavaDeveloper.banksystem.forms.ClientForm;
 import com.JuniorJavaDeveloper.banksystem.forms.CreditForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
 import com.JuniorJavaDeveloper.banksystem.services.creditmanager.CreditManager;
-import com.JuniorJavaDeveloper.banksystem.services.impl.BankServiceImpl;
-import com.JuniorJavaDeveloper.banksystem.services.impl.ClientServiceImpl;
-import com.JuniorJavaDeveloper.banksystem.services.impl.CreditServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,18 +18,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/credit")
 public class CreditController {
 
-    private final MainService mainService;
+    private final MainService<Credit> mainService;
     private final FormManager formManager;
-    private final MainService bankService;
+    private final MainService<Bank> bankService;
     private final CreditOfferService creditOfferService;
-    private final MainService clientService;
+    private final MainService<Client> clientService;
     private final CreditManager creditManager;
 
     @Autowired
-    public CreditController(CreditServiceImpl mainService,
-                            BankServiceImpl bankService,
+    public CreditController(MainService<Credit> mainService,
+                            MainService<Bank> bankService,
                             CreditOfferService creditOfferService,
-                            ClientServiceImpl clientService,
+                            MainService<Client> clientService,
                             FormManager formManager,
                             CreditManager creditManager) {
         this.mainService = mainService;
@@ -63,7 +59,7 @@ public class CreditController {
 
         CreditForm creditForm = formManager.getCreditForm();
 
-        Credit credit = (Credit) mainService.findById(id);
+        Credit credit = mainService.findById(id);
 
         creditForm.setCredit(credit);
         creditForm.setTitle("Кредит");
@@ -95,7 +91,7 @@ public class CreditController {
     public String newElemBank(Model model, @PathVariable("id") UUID id) {
 
         Credit credit = new Credit();
-        Bank bank = (Bank) bankService.findById(id);
+        Bank bank = bankService.findById(id);
         credit.setBank(bank);
 
         CreditForm creditForm = formManager.getCreditForm();
@@ -118,7 +114,7 @@ public class CreditController {
         CreditForm creditForm = formManager.getCreditForm();
 
         Credit credit = new Credit();
-        Client client = (Client) clientService.findById(id);
+        Client client = clientService.findById(id);
         credit.setClient(client);
 
         creditForm.setTitle("Новый кредит");
@@ -168,25 +164,25 @@ public class CreditController {
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") UUID id) {
 
-        ClientForm clientForm = formManager.getClientForm();
+        CreditForm creditForm = formManager.getCreditForm();
 
-        Client client = (Client) mainService.findById(id);
+        Credit credit = mainService.findById(id);
 
-        clientForm.setClient(client);
-        clientForm.setTitle(client.getFirstName() + " " + client.getLastName());
-        clientForm.setContent("clientedit");
+        creditForm.setCredit(credit);
+        creditForm.setTitle("Кредит");
+        creditForm.setContent("creditedit");
 
-        model.addAttribute("form", clientForm);
+        model.addAttribute("form", creditForm);
 
         return "index";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("form") ClientForm clientForm, @PathVariable("id") UUID id) throws Exception {
-        Client client = clientForm.getClient();
-        client.setId(id);
-        mainService.save(client);
-        return "redirect:/client";
+    public String update(@ModelAttribute("form") CreditForm creditForm, @PathVariable("id") UUID id) throws Exception {
+        Credit credit = getCreditByForm(creditForm);
+        credit.setId(id);
+        mainService.save(credit);
+        return "redirect:/credit";
     }
 
     @DeleteMapping("/{id}")
@@ -197,8 +193,8 @@ public class CreditController {
     }
 
     private Credit getCreditByForm(CreditForm Form) {
-        Bank bank = (Bank) bankService.findById(Form.getBankId());
-        Client client = (Client) clientService.findById(Form.getClientId());
+        Bank bank = bankService.findById(Form.getBankId());
+        Client client = clientService.findById(Form.getClientId());
         CreditOffer creditOffer = creditOfferService.findById(Form.getCreditOfferId());
 
         Credit credit = Form.getCredit();

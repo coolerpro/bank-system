@@ -6,7 +6,6 @@ import com.JuniorJavaDeveloper.banksystem.forms.CreditOfferForm;
 import com.JuniorJavaDeveloper.banksystem.forms.FormManager;
 import com.JuniorJavaDeveloper.banksystem.services.CreditOfferService;
 import com.JuniorJavaDeveloper.banksystem.services.MainService;
-import com.JuniorJavaDeveloper.banksystem.services.impl.BankServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +18,12 @@ import java.util.UUID;
 public class CreditOfferController {
 
     private final CreditOfferService creditOfferService;
-    private final MainService bankService;
+    private final MainService<Bank> bankService;
     private final FormManager formManager;
 
     @Autowired
     public CreditOfferController(CreditOfferService creditOfferService,
-                                 BankServiceImpl bankService,
+                                 MainService<Bank> bankService,
                                  FormManager formManager) {
         this.creditOfferService = creditOfferService;
         this.bankService = bankService;
@@ -80,7 +79,7 @@ public class CreditOfferController {
 
         CreditOfferForm creditOfferForm = formManager.getCreditOfferForm();
 
-        Bank bank = (Bank) bankService.findById(id);
+        Bank bank = bankService.findById(id);
         CreditOffer creditOffer = new CreditOffer();
         creditOffer.setBank(bank);
 
@@ -98,7 +97,7 @@ public class CreditOfferController {
     public String create(@ModelAttribute("form") CreditOfferForm creditOfferForm) throws Exception {
 
         CreditOffer creditOffer = creditOfferForm.getCreditOffer();
-        Bank bank = (Bank) bankService.findById(creditOfferForm.getBankId());
+        Bank bank = bankService.findById(creditOfferForm.getBankId());
         creditOffer.setBank(bank);
         creditOfferService.save(creditOffer);
 
@@ -126,7 +125,7 @@ public class CreditOfferController {
     public String update(@ModelAttribute("form") CreditOfferForm creditOfferForm, @PathVariable("id") UUID id) throws Exception {
 
         CreditOffer creditOffer = creditOfferForm.getCreditOffer();
-        Bank bank = (Bank) bankService.findById(creditOfferForm.getBankId());
+        Bank bank = bankService.findById(creditOfferForm.getBankId());
         creditOffer.setBank(bank);
         creditOffer.setId(id);
         creditOfferService.save(creditOffer);
