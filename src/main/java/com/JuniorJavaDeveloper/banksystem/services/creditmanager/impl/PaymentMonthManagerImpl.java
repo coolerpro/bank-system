@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class PaymentMonthManagerImpl implements PaymentMonthManager {
 
-    public void addPaymentMonth(Credit credit, LocalDate datePay, BigDecimal paymentSum, BigDecimal sumBody) {
+    public void addPaymentMonth(Credit credit, LocalDate datePay, BigDecimal paymentSum, BigDecimal sumBody, BigDecimal sumPercent) {
 
         PaymentSchedule paymentSchedule = credit.getPaymentSchedule();
         List<PaymentMonth> paymentMonthList = paymentSchedule.getPaymentMonths();
@@ -25,7 +25,7 @@ public class PaymentMonthManagerImpl implements PaymentMonthManager {
 
         paymentMonth.setPaymentSum(paymentSum);
         paymentMonth.setSumBody(sumBody);
-        paymentMonth.setSumPercent(paymentSum.subtract(sumBody));
+        paymentMonth.setSumPercent(sumPercent);
 
         paymentMonthList.add(paymentMonth);
 
