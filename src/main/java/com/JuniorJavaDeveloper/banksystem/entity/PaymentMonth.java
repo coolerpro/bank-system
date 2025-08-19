@@ -1,8 +1,10 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -14,19 +16,24 @@ public class PaymentMonth {
     @Column(name = "id")
     private UUID id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "paymentscheduleid")
     private PaymentSchedule paymentSchedule;
 
+    @NotNull
     @Column(name = "paymentdate")
     private LocalDate paymentDate;
 
+    @NotNull
     @Column(name = "paymentsum")
     private BigDecimal paymentSum;
 
+    @NotNull
     @Column(name = "sumbody")
     private BigDecimal sumBody;
 
+    @NotNull
     @Column(name = "sumpercent")
     private BigDecimal sumPercent;
 
@@ -87,5 +94,18 @@ public class PaymentMonth {
 
     public void setSumPercent(BigDecimal sumPercent) {
         this.sumPercent = sumPercent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentMonth that = (PaymentMonth) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

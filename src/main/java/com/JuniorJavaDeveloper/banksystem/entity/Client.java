@@ -1,6 +1,10 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -11,21 +15,34 @@ public class Client {
     @Column(name = "id")
     private UUID id;
 
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "firstname")
     private String firstName;
 
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "lastname")
     private String lastName;
 
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "fathername")
     private String fatherName;
 
+    @NotNull
+    @Email
+    @Size(min = 1, max = 255)
     @Column(name = "email")
     private String email;
 
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "pasportnumber")
     private String pasportNumber;
 
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "phonenumber")
     private String phoneNumber;
 
@@ -87,5 +104,18 @@ public class Client {
 
     public String getName(){
         return getLastName() + " " + getFirstName() + " " + getFatherName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(id, client.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

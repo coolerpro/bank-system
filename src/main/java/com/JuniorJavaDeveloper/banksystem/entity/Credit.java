@@ -1,7 +1,9 @@
 package com.JuniorJavaDeveloper.banksystem.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -13,28 +15,35 @@ public class Credit {
     @Column(name = "id")
     private UUID id;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "clientid")
     private Client client;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "banktid")
     private Bank bank;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "creditofferid")
     private CreditOffer creditOffer;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "paymentscheduleid")
     private PaymentSchedule paymentSchedule;
 
+    @NotNull
     @Column(name = "sum")
     private BigDecimal sum;
 
+    @NotNull
     @Column(name = "sumbody")
     private BigDecimal sumBody;
 
+    @NotNull
     @Column(name = "sumpercent")
     private BigDecimal sumPercent;
 
@@ -100,5 +109,18 @@ public class Credit {
 
     public void setSum(BigDecimal sum) {
         this.sum = sum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Credit credit = (Credit) o;
+        return Objects.equals(id, credit.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
